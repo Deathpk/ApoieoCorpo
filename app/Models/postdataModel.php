@@ -12,7 +12,7 @@ class postdataModel extends Model
 
     public static function insertData($obj,$email){
        postdataModel::insert(['UserID'=>$email, 'Ramo'=>$obj->Ramo, 'Nome'=>$obj->nomeEstabelecimento,
-       'Descricao'=>$obj->Descricao, 'Estado'=>$obj->Estado, 'Cidade'=>$obj->Cidade, 'Contato'=>$obj->Contato]);
+       'Descricao'=>$obj->Descricao, 'Estado'=>$obj->Estado, 'Cidade'=>$obj->Cidade, 'Contato'=>$obj->Contato , 'Link'=>$obj->Link]);
     }
 
 }

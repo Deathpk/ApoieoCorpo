@@ -17,7 +17,7 @@
     <!-- NAVBAR -->
     
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Apoie o Corpo</a>
+    <a class="navbar-brand" href="{{route('dash')}}">Apoie o Corpo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -71,6 +71,11 @@
                 <div class="form-group">
                     <label for="Contato">Numero de Contato:</label>
                     <input type="tel" class="form-control" name = "Contato" id="Contato" placeholder="EX: 3112345678">
+                </div>
+                
+                <div class="form-group">
+                  <label for="Link">Rede Social / Link para Contato</label>
+                  <input type="text" class="form-control" name="Link" id="Link" placeholder="Rede Social , ou Link para contato ">
                 </div>
 
             <button type="submit" class="btn btn-primary">Atualizar Dados</button>

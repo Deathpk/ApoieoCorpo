@@ -33,6 +33,7 @@ class UpdateBusinessRequest extends FormRequest
             'nomeEstabelecimento'=>'required|min:1|max:50',
             'Descricao'=>'required|min:10|max:255',
             'Contato'=>'required|min:8|max:50',
+            'Link'=>'max:100',
         ];
     }
 
@@ -52,6 +53,9 @@ class UpdateBusinessRequest extends FormRequest
             'Contato.required'=>'O campo Contato é obrigatório!',
             'Contato.min'=>'O campo Contato deve conter no mínimo 8 Caracteres',
             'Contato.max'=>'O campo Contato deve conter no máximo 50 Caracteres',
+
+            //Exceções Link
+            'Link.max'=>'O campo Link para contato deve conter no máximo 100 Caracteres ',
 
         ];
     }

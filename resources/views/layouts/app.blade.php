@@ -20,6 +20,16 @@
     </main>
 
 </body>
+<!-- Footer -->
+<footer class="page-footer font-small grey">
 
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+      <a href=""> Apoie o Corpo</a>
+    </div>
+    <!-- Copyright -->
+  
+  </footer>
+  <!-- Footer -->
 </html>
 

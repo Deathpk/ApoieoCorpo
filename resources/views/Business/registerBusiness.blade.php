@@ -18,7 +18,7 @@
     <!-- NAVBAR -->
     
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Apoie o Corpo</a>
+        <a class="navbar-brand" href="{{route('dash')}}">Apoie o Corpo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -64,10 +64,25 @@
                 <select class="form-control"  name = "Ramo" id="Ramo">
                 <option selected></option>
                 <option value="Culinaria">Culinária</option>
-                <option value="Tecnologia">Tecnología</option>
+                <option value="Tecnologia">Tecnologia</option>
                 <option value="Beleza">Beleza</option>
+                <option value="Saude">Saúde</option>
+                <option value="Bem estar">Bem estar</option>
+                <option value="Vendas">Vendas</option>
+                <option value="Vestuario">Vestuário</option>
                 <option value="Manutencao">Manutenção</option>
+                <option value="Professor">Professor</option>
+                <option value="PersonalTrainer">PersonalTrainer</option>
+                <option value="Loja de esportes">Loja de esportes</option>
+                <option value="Grafica">Gráfica</option>
+                <option value="Fotografia">Fotografia</option>
+                <option value="DesignerGrafico">DesignerGráfico</option>
+                <option value="Designer de Ambientes">Designer de Ambientes</option>
+                <option value="Manutencao Veicular">Manutenção Veicular</option>
                 <option value="Varejo">Varejo</option>
+                <option value="Artesanato">Artesanato</option>
+                <option value="Assessoria de eventos">Assessoria de eventos</option>
+                <option value="Bomboniere">Bomboniere</option>
                 </select>
               </div>
 
@@ -75,9 +90,15 @@
               <label for="Estado">Estado:</label>
               <select class="form-control"  name = "Estado" id="Estado">
               <option selected></option>
-              <option value="MG">Minas Gerais</option>
-              <option value="SP">São Paulo</option>
-              <option value="RJ">Rio de Janeiro</option>
+              <option value = "MG">Minas Gerais</option>
+              <option value = "SP">São Paulo</option>
+              <option value = "RJ">Rio de Janeiro</option>
+              <option value = "GO">Goiás</option>
+              <option value = "ES">Espírito Santo</option>
+              <option value = "BA">Bahia</option>
+              <option value = "PR">Paraná</option>
+              <option value = "MS">Mato Grosso do Sul</option>
+              <option value = "TO">Tocantins</option>
               </select>
             </div>
 
@@ -89,6 +110,11 @@
             <div class="form-group">
                 <label for="Contato">Numero de Contato:</label>
                 <input type="tel" class="form-control" name = "Contato" id="Contato" placeholder="EX: 3112345678">
+            </div>
+
+            <div class="form-group">
+              <label for="Link">Rede Social / Link para Contato</label>
+              <input type="text" class="form-control" name="Link" id="Link" placeholder="Rede Social , ou Link para contato ">
             </div>
 
             <button type="submit" class="btn btn-primary">Cadastrar</button>

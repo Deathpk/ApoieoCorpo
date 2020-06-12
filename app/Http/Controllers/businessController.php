@@ -10,6 +10,7 @@ use App\Models\postdataModel;
 
 class businessController extends Controller
 {   
+    private $SearchResult = null;
     //Retorna view para cadastro de bussines 
     public function registerBusiness(){
         if (Auth::check()){
@@ -34,11 +35,19 @@ class businessController extends Controller
     }
 
     //Atualiza os dados no DB :)
-    public function doUpdateBusiness(UpdateBusinessRequest $request){ // Colocar custom Request depois...
-        //dd($request->choseBusiness);
+    public function doUpdateBusiness(UpdateBusinessRequest $request){
         $updateBusiness = postdataModel::where('ID', '=', $request->choseBusiness)->update(['Nome'=>$request->nomeEstabelecimento, 'Descricao'=> $request->Descricao, 
-        'Contato'=>$request->Contato]);
+        'Contato'=>$request->Contato, 'Link'=>$request->Link]);
         return redirect('/')->with('status','Dados Atualizados com sucesso!');
+    }
+
+    //SEARCHBAR
+    public function searchBusiness(Request $request){
+         $SearchResult = postdataModel::where([['Estado', '=', $request->Estado],['Ramo', '=',$request->Ramo]
+          , ['Cidade', '=', $request->Cidade]])->get();
+
+          return view('Business.searchresultBusiness', compact('SearchResult'));
+        
     }
 
 }

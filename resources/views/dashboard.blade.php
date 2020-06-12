@@ -11,9 +11,10 @@
                 margin: 0;
             }
             #content {
-  display: flex; /* or inline-flex */
-  flex-wrap: wrap ;
-  }
+            display: flex; /* or inline-flex */
+            flex-wrap: wrap ;
+            padding-left: 6%;
+            }
 
 </style>
 
@@ -66,27 +67,55 @@
       </nav> 
       <br> 
       <!-- SEARCH BAR --> 
-      <form class="form-inline"> 
-        <input class="form-control mr-sm-2" type="search" placeholder="Estabelecimento" aria-label="Search">
+    <form class="form-inline" action="{{route('SearchBusiness')}}" method="post">
+      @csrf
+      @method('PUT') 
         <select class="form-control mr-sm-2" id = "Estado" name="Estado" >
           <option selected>Selecione o Estado</option>
-          <option value = "Minas Gerais">Minas Gerais</option>
-          <option value = "São Paulo">São Paulo</option>
-          <option value = "Rio de Janeiro">Rio de Janeiro</option>
+          <option value = "MG">Minas Gerais</option>
+          <option value = "SP">São Paulo</option>
+          <option value = "RJ">Rio de Janeiro</option>
+          <option value = "GO">Goiás</option>
+          <option value = "ES">Espírito Santo</option>
+          <option value = "BA">Bahia</option>
+          <option value = "PR">Paraná</option>
+          <option value = "MS">Mato Grosso do Sul</option>
+          <option value = "TO">Tocantins</option>
         </select>
-        <input class="form-control mr-sm-2" type="text" placeholder="Cidade" aria-label="Cidade">
+
+        <select class="form-control mr-sm-2" id = "Ramo" name="Ramo">
+                <option selected>Selecione o Ramo de Atuação</option>
+                <option value="Culinaria">Culinária</option>
+                <option value="Tecnologia">Tecnologia</option>
+                <option value="Beleza">Beleza</option>
+                <option value="Saude">Saúde</option>
+                <option value="Bem estar">Bem estar</option>
+                <option value="Vendas">Vendas</option>
+                <option value="Vestuario">Vestuário</option>
+                <option value="Manutencao">Manutenção</option>
+                <option value="Professor">Professor</option>
+                <option value="PersonalTrainer">PersonalTrainer</option>
+                <option value="Loja de esportes">Loja de esportes</option>
+                <option value="Grafica">Gráfica</option>
+                <option value="Fotografia">Fotografia</option>
+                <option value="DesignerGrafico">DesignerGráfico</option>
+                <option value="Designer de Ambientes">Designer de Ambientes</option>
+                <option value="Manutencao Veicular">Manutenção Veicular</option>
+                <option value="Varejo">Varejo</option>
+                <option value="Artesanato">Artesanato</option>
+                <option value="Assessoria de eventos">Assessoria de eventos</option>
+                <option value="Bomboniere">Bomboniere</option>
+        </select>
+        <input class="form-control mr-sm-2" type="text" placeholder="Cidade" aria-label="Cidade", name="Cidade">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-       </div> <!-- VER DE ONDE DIABOS É ESSE DIV -->
       </form>  
   </div>
     <br>
     <br>
 
-      <!-- Content -->
 
-      <!-- aplicar um foreach com os posts dps -->
-      
-    <div class="container-fluid" id="content">
+      <!-- Content -->
+      <div class="container-fluid" id="content">
       @foreach($allBusiness as $obj)
       <div class="card" style="width: 18rem;">
         <div class="card-body">
@@ -94,10 +123,12 @@
           <h6 class="card-subtitle mb-2 text-muted">{{$obj->Ramo}}</h6>
           <h5 class="card-title">{{$obj->Nome}}</h5>
         <p class="card-text">{{$obj->Descricao}}</p>
-        <h6 class="card-subtitle mb-2 text-muted">Cidade: {{$obj->Cidade}}</h6>
-        <h6 class="card-subtitle mb-2 text-muted">Estado: {{$obj->Estado}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Localidade: {{$obj->Cidade}}/{{$obj->Estado}}</h6>
+        {{-- <h6 class="card-subtitle mb-2 text-muted">Estado: {{$obj->Estado}}</h6> --}}
         <h6 class="card-subtitle mb-2 text-muted">Contato: {{$obj->Contato}}</h6>
-        
+        @if($obj->Link != null)
+        <a href="{{$obj->Link}}" class="btn btn-secondary btn-sm" role="button" aria-pressed="true">RedeSocial/WhatsApp</a>
+        @endif
         </div>
         </div>
         @endforeach

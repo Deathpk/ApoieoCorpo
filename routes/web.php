@@ -15,7 +15,7 @@ use App\Models\postdataModel;
 */
 
 Route::get('/', function () {
-    $allBusiness = postdataModel::all();
+    $allBusiness = postdataModel::all()->sortByDesc('ID');
     return view('dashboard', compact('allBusiness'));
 })->name('dash');
 
@@ -24,8 +24,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('logout', 'userController@logout')->name('logout');
 
 //Business Routes
-Route::get('dashboard/load', 'businessController@loadAll')->name('dashboard.load');
+// Route::get('dashboard/load', 'businessController@loadAll')->name('dashboard.load');
 Route::get('Business/register', 'businessController@registerBusiness')->name('businessReg');
 Route::put('Business/doRegister', 'businessController@doRegister')->name('Register');
 Route::get('Business/getUserBusiness', 'businessController@updateBusiness')->name('getUserBusiness');
 Route::put('Business/updateUserBusiness', 'businessController@doUpdateBusiness')->name('updateUserBusiness');
+Route::put('Business/Search', 'businessController@searchBusiness')->name('SearchBusiness');
