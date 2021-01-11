@@ -1,0 +1,229 @@
+// input, select {
+//     border-radius: 50px !important;
+// }
+
+
+
+@media (min-width: 768px) {
+
+    #carousel-right {
+        position: absolute;
+        right: 0;
+        z-index: 15;
+        // display: flex;
+        justify-content: center;
+        padding-left: 0;
+        list-style: none;
+        top: 50%;
+        transform: translate(0%, -50%);
+    }  
+
+    #servicos {
+        height: 100vh;
+    }    
+}
+
+@media (min-width: 2560px) {
+
+    #middle-screen {
+        transform: translate(-50%, -50%);
+    }
+        
+}
+
+
+.VueCarousel-dot {
+    height: 1.25rem !important;
+    width: 1.25rem !important;
+    max-width: 1.25rem !important;
+    background-color: transparent !important;
+    border-radius: 50px !important;
+    border: 3px solid #372A26 !important;
+    margin-top: 0px !important;
+    padding: 0px !important;
+    outline: 1px solid transparent !important;
+}
+
+.VueCarousel-dot--active {
+    opacity: 1 !important;
+    background-color: #372A26 !important;
+    border-radius: 50px !important;
+}
+
+.VueCarousel-dot-container {
+    display: none !important;
+}
+
+.box-shadow {
+    box-shadow: 1px 2px 5px 0px;
+}
+
+.align-items-flex-end {
+    align-items: flex-end !important;
+}
+
+.navbar-toggler {
+    border: 1px solid #372A26 !important;
+}
+
+.VueCarousel-inner {
+    flex-basis: 350px !important;
+}
+
+::placeholder {
+    color: #03A9F4 !important;
+    opacity: 1 !important; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #03A9F4 !important;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #03A9F4 !important;
+}
+
+#hero-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/home/hero.png");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+#hero-info {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/home/Subtraction 1.png");
+    // height: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.container-fluid {
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+.text-blue {
+    color: #03A9F4;
+}
+
+.btn-blue {
+    background: #03A9F4;
+    border-radius: 50px;
+    border: none;
+    color: #FFFFFF;
+}
+
+.btn-blue-border {
+    background: transparent;
+    border: 3px solid #03A9F4;
+    color: #03A9F4;
+}
+
+.btn-blue-border:hover {
+    background: #03A9F4;
+    border: 3px solid #03A9F4;
+    color: #FFFFFF;
+}
+
+.btn-blue-border-radius {
+    background: transparent;
+    border-radius: 50px;
+    border: 3px solid #03A9F4;
+    color: #03A9F4;
+}
+
+.btn-blue-border-radius:hover {
+    background: transparent;
+    border-radius: 50px;
+    border: 3px solid #03A9F4;
+    color: #03A9F4;
+}
+
+.btn-blue:hover {
+    background: #03A9F4;
+    border-radius: 50px;
+    border: none;
+    color: #FFFFFF;
+}
+
+.justify-content-space-evenly {
+    justify-content: space-evenly;
+}
+
+.justify-content-space-around {
+    justify-content: space-around;
+}
+
+.border-grey {
+    background-color: rgba(112,112,112, 0.5);
+    border-radius: 50px;
+    padding: 0.5rem;
+}
+
+.fixed-top {
+    position: absolute !important;
+}
+
+.form-group {
+    margin-bottom: 0rem;
+}
+
+.form-control {
+    background-color: #fff;
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 10px 10px 10px rgba(204, 197, 185, 0.5) !important;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 10px 10px 10px rgba(204, 197, 185, 0.5) !important;
+}
+
+#footer {
+    background-color: #1A1C1D;
+}
+
+.bg-dark {
+    background-color: #000000 !important;
+}
+// #login, #register {
+//     background-image: linear-gradient(rgba(250, 250, 248, 0.5), rgba(250, 250, 248, 0.5)), url("../img/home/Group 2.png");
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     height: 100vh;
+//     // position: relative;
+// }
+
+
+
+#middle-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.text-decoration-urderline {
+    text-decoration: underline;
+}
