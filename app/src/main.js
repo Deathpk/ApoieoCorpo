@@ -31,6 +31,11 @@ Vue.use(BootstrapVue)
 import VueCarousel from 'vue-carousel';
 Vue.use(VueCarousel);
 
+// Vue Loading
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+Vue.use(Loading);
+
 /* eslint-disable no-new */
 new Vue({
   router,
