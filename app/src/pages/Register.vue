@@ -1,7 +1,10 @@
 <template>
     <section id="register">
-        <div class="container">
+        <div class="container ass">
             <div class="row">
+                <div class="form-group mt-4 ml-4">
+                    <router-link class="btn btn-white text-blue display-4" to="/home">Apoie o Corpo</router-link>
+                </div>
                 <div id="middle-screen" class="col-12 col-md-6 col-lg-4 col-xl-2 text-center">
                     <form v-on:submit.prevent="register">
                         <div class="form-group text-center">
@@ -84,6 +87,9 @@ export default {
 </script>
 
 <style scoped>
+.ass {
+    position: absolute;
+}
 
 .image {
     position: absolute;
