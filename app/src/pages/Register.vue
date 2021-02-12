@@ -87,7 +87,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .ass {
     position: absolute;
 }
@@ -112,5 +112,12 @@ export default {
     #brand {
         width: 200px;
     }
+}
+
+.container-fluid {
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 </style>

@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">{{routeName}}</a>
-      <button class="navbar-toggler navbar-burger"
+      <button class="navbar-toggler navbar-burger mr-2"
               type="button"
               @click="toggleSidebar"
               :aria-expanded="$sidebar.showSidebar"
