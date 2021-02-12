@@ -21,6 +21,7 @@
                         </div>
                         <button class="btn btn-blue text-uppercase text-white font-weight-bold w-75 mb-3">Cadastrar-se</button>
                     </form>
+                    <router-link class="text-blue" to="/login">Você já possui cadastro? Clique aqui</router-link>
                 </div>
             </div>
         </div>
