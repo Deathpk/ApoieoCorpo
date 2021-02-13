@@ -18,16 +18,15 @@
                 <span>
                   <i :class="statsCards.ativado"></i> <span class="text-dark font-weight-bold">Ramo:</span> {{ servico.Ramo }} <br>
                   <i :class="statsCards.ativado"></i> <span class="text-dark font-weight-bold">E-mail:</span> {{ servico.Contato }} <br>
-                  <i :class="statsCards.ativado"></i> <span class="text-dark font-weight-bold">Contato:</span><a :href="servico.WhatsApp" target="_blank" class="text-green"> WhatsApp</a>                  
-                </span>
-                <span>
-                  <!-- <i class="fas fa-dollar-sign"></i> <span class="text-dark font-weight-bold">Valor:</span> R$ {{servico.valor}} <br>
-                  <i class="ti-timer mb-2"></i> <span class="text-dark font-weight-bold">Tempo de duração:</span> 00h{{servico.duracao}}min<br> -->
+                  <span v-if="!(servico.WhatsApp == null)"><i :class="statsCards.ativado"></i> <span class="text-dark font-weight-bold">WhatsApp:</span><a :href="servico.WhatsApp" target="_blank" class="text-green"> WhatsApp</a></span> <br>                  
+                  <span v-if="!(servico.Facebook == null)"><i :class="statsCards.ativado"></i> <span  v-if="!(servico.WhatsApp == null)" class="text-dark font-weight-bold">Facebook:</span><a :href="servico.Facebook" target="_blank" class="text-blue"> Facebook</a></span> <br>                  
+                  <span v-if="!(servico.Instagram == null)"><i :class="statsCards.ativado"></i> <span v-if="!(servico.WhatsApp == null)" class="text-dark font-weight-bold">Instagram:</span><a :href="servico.Instagram" target="_blank" class="text-purple"> Instagram</a></span> <br>  
                 </span>
               </span>
               <!-- Botões -->
-              <!-- <button class="btn mr-1 mt-1" :to="{ name:'serviço/alterar', params: { id: servico.id } }" title="Alterar serviço"><i class="fa fa-edit"></i></button>
-              <button class="btn mx-1" @click="desativar(servico.id)" title="Desativar serviço"><i class="fa fa-times-circle"></i></button>
+              <button class="btn mr-1 mt-1" v-on:click="editar(servico.ID)">Editar <i class="fa fa-edit"></i></button>
+              <!-- <button class="btn mr-1 mt-1" :to="{ path:'/editar', params: { id: servico.ID } }" title="Editar serviço"><i class="fa fa-edit"></i></button> -->
+              <!-- <button class="btn mx-1" @click="desativar(servico.id)" title="Desativar serviço"><i class="fa fa-times-circle"></i></button>
               <button class="btn mx-1" disabled @click="ativar(servico.id)" title="Ativar serviço"><i class="fa fa-check-circle"></i></button>
               <button class="btn mx-1" @click="excluir(servico.id)" title="Excluir serviço"><i class="fa fa-trash-alt"></i></button> -->
             <!-- </span> -->
@@ -45,7 +44,7 @@
         </stats-card>
       </div>
     </div>
-    <router-link class="btn btn-blue" to="/cadastro">Adicionar novo</router-link>
+    <router-link class="btn btn-blue" to="/servico/cadastro">Adicionar novo</router-link>
   </div>
 </template>
 <script>
@@ -71,20 +70,36 @@ export default {
   },  
   created() {
     this.pegar();
-    // setInterval(() => this.loadServicos(), 2000);
   },
   methods: {
     pegar() {   
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.formContainer,
+        canCancel: false,
+        onCancel: this.onCancel,
+      })
       axios.get('/api/business/get/all', {
         headers: { 
           Authorization: 'Bearer ' + localStorage.getItem('access_token')
         } 
       }).then((response) => {
-        console.dir(response.data.userPosts)
-        this.servicos = response.data.userPosts
+        this.servicos = response.data.userPosts    
+        setTimeout(() => {
+          loader.hide(),
+          this.$notify({
+            message: 'Serviços carregados com sucesso.',
+            type: 'success'
+          })
+        },1000)
       })
-      .catch((error) => {
-        console.dir(error)
+      .catch((error) => {  
+        setTimeout(() => {
+          loader.hide(),
+          this.$notify({
+            message: error.response.data.message,
+            type: 'danger'
+          })
+        },1000)
       })
     },
     desativar(id) {
@@ -199,9 +214,7 @@ export default {
         },1000)   
         this.descricao = ''
       })
-      .catch((error) => {
-        console.dir(error)
-        
+      .catch((error) => {        
         setTimeout(() => {
           loader.hide(),
           this.$notify({
@@ -210,6 +223,10 @@ export default {
           })
         },1000)
       })
+    },
+    editar(id) {
+      localStorage.setItem('ID', id)
+      this.$router.push({ path: '/servico/editar' })
     }
   }
 };

@@ -13,6 +13,7 @@ import Register from "@/pages/Register.vue";
 import Forgot from "@/pages/Forgot.vue";
 import Servico from "@/pages/Servico.vue";
 import ServicoCadastro from "@/pages/ServicoCadastro.vue";
+import ServicoEditar from "@/pages/ServicoEditar.vue";
 
 const routes = [
   {
@@ -58,9 +59,14 @@ const routes = [
         component: Servico
       },
       {
-        path: "/cadastro",
-        name: "/cadastro",
+        path: "servico/cadastro",
+        name: "cadastro",
         component: ServicoCadastro
+      },
+      {
+        path: "servico/editar",
+        name: "editar",
+        component: ServicoEditar
       },
     ]
   },

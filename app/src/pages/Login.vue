@@ -10,11 +10,13 @@
                         <div class="form-group text-center">
                             <h3 class="text-blue text-uppercase font-weight-bold">Seja bem-vindo</h3>
                         </div>
-                        <div class="form-group mt-5 mb-4">
-                            <input v-model="email" type="email" class="form-control" placeholder="E-mail" required>
+                        <div class="form-group mt-5 mb-4 text-left">
+                            <label class="text-blue ml-2 font-weight-bold">E-mail</label>
+                            <input v-model="email" type="email" class="form-control" required>
                         </div>
-                        <div class="form-group my-4">
-                            <input v-model="password" type="password" class="form-control" placeholder="Senha" required>
+                        <div class="form-group mb-4 text-left">
+                            <label class="text-blue ml-2 font-weight-bold">Senha</label>
+                            <input v-model="password" type="password" class="form-control" required>
                         </div>
                         <button class="btn btn-blue text-uppercase text-white font-weight-bold w-75 mt-4 mb-3">Entrar</button>
                     </form>

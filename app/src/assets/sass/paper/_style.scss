@@ -203,7 +203,8 @@ input{
     color: white;
 }
 
-.text-blue {
+.text-blue,
+.text-blue:hover {
     color: #03A9F4;
 }
 
@@ -248,4 +249,9 @@ input{
 .text-green,
 .text-green:hover {
     color: #41B883;
+}
+
+.text-purple,
+.text-purple:hover {
+    color: #ac286a;
 }
