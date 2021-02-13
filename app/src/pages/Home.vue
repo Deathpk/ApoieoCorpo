@@ -1,7 +1,7 @@
 <template>
-    <span>
+    <div id="home">
         <nav class="navbar navbar-expand-sm fixed-top navbar-transparent">
-            <a class="navbar-brand text-uppercase text-white font-weight-bold ml-5" href="#">Apoie o corpo</a>
+            <router-link class="navbar-brand text-white text-uppercase font-weight-bold ml-5" to="/home">Apoie o corpo</router-link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -10,8 +10,8 @@
                     <a class="nav-item nav-link text-uppercase text-white font-weight-bold" href="#home">Home</a>
                     <a class="nav-item nav-link text-uppercase text-white font-weight-bold" href="#sobre">Sobre</a>
                     <a class="nav-item nav-link text-uppercase text-white font-weight-bold" href="#servicos">Serviços</a>
-                    <a class="nav-item nav-link text-uppercase text-white font-weight-bold">Login<router-link class="text-white" :to="login"></router-link></a>
-                    <button class="btn btn-blue">Cadastrar-se<router-link class="text-white" :to="register"></router-link></button>
+                    <router-link class="text-white text-uppercase font-weight-bold" to="/login">Login</router-link>
+                    <router-link class="btn btn-blue text-white" to="/register">Cadastrar-se</router-link>
                 </div>
             </div>
         </nav>
@@ -353,19 +353,15 @@
             <footer class="page-footer font-small blue pt-4">
               <div class="col-md-12 d-block d-md-flex text-center text-md-left mb-4">
                 <div class="col-md-6 mt-md-0 mt-3">
-                    <h2 class="text-blue text-uppercase font-weight-bold">Apoie o corpo</h2>
+                    <h4 class="text-blue text-uppercase font-weight-bold">Apoie o corpo</h4>
                     <p class="text-white">Diante do cénario que estamos vivendo, em meio a essa pandemia muitos irmãos que possuem um négocio próprio estão passando por dificuldades para manter seu empreendimento em atividade , e até mesmo arcar com suas responsabilidades financeiras.</p>
-                    <p-button class="btn-blue" type="info"
-                                round
-                                @click.native.prevent="updateProfile">
-                        Cadastrar-se
-                    </p-button>
+                    <router-link class="btn btn-blue text-white" to="/register">Cadastrar-se</router-link>
                 </div>
               </div>
               <div class="footer-copyright text-white text-center py-3 bg-dark">All copyrights reserved © 2020 - Apoie o Corpo</div>
             </footer>
         </section>
-    </span>
+    </div>
 </template>
 <script>
 export default {
