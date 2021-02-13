@@ -23,7 +23,7 @@ Route::group(['middleware'=>['apiJwt']],function(){
     Route::prefix('business')->group(function (){
         Route::post('/doRegister', 'Api\businessController@register');
         Route::post('/update', 'Api\businessController@updateBusiness');
-        Route::post('/get/all','Api\businessController@getAllUserPosts');
+        Route::get('/get/all','Api\businessController@getAllUserPosts');
 
     });
 });

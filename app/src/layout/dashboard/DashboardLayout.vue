@@ -3,6 +3,7 @@
     <side-bar>
       <template slot="links">
         <sidebar-link to="/dashboard" name="Dashboard" icon="ti-panel"/>
+        <sidebar-link to="/servico" name="Servico" icon="ti-panel"/>
       </template>
       <mobile-menu>
         <ul class="navbar-nav ml-auto">

@@ -11,6 +11,8 @@ import Home from "@/pages/Home.vue";
 import Login from "@/pages/Login.vue";
 import Register from "@/pages/Register.vue";
 import Forgot from "@/pages/Forgot.vue";
+import Servico from "@/pages/Servico.vue";
+import ServicoCadastro from "@/pages/ServicoCadastro.vue";
 
 const routes = [
   {
@@ -49,6 +51,16 @@ const routes = [
         path: "dashboard",
         name: "dashboard",
         component: Dashboard
+      },
+      {
+        path: "servico",
+        name: "servico",
+        component: Servico
+      },
+      {
+        path: "/cadastro",
+        name: "/cadastro",
+        component: ServicoCadastro
       },
     ]
   },

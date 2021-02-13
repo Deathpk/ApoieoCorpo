@@ -52,7 +52,7 @@ class businessController extends Controller
             return response()->json([
                 'error'=>false,
                 'userPosts'=>$userPosts
-            ],302);
+            ], 200);
 
         } catch(Exception $e){
             return response()->json([

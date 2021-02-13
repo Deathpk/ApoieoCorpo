@@ -134,8 +134,6 @@ input{
     color: #FFFFFF;
 }
 
-
-
 .VueCarousel-dot {
     height: 1.25rem !important;
     width: 1.25rem !important;
@@ -240,4 +238,14 @@ input{
 
 .text-decoration-urderline {
     text-decoration: underline;
+}
+
+.main-panel > .content {
+    padding: 30px 15px;
+    min-height: 100vh;
+}
+
+.text-green,
+.text-green:hover {
+    color: #41B883;
 }
