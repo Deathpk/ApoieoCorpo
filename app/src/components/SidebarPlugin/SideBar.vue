@@ -39,6 +39,7 @@
 <script>
 import MovingArrow from "./MovingArrow.vue";
 import SidebarLink from "./SidebarLink";
+
 export default {
   props: {
     title: {
@@ -103,7 +104,8 @@ export default {
       windowWidth: 0,
       isWindows: false,
       hasAutoHeight: false,
-      links: []
+      links: [],
+      access_token: []
     };
   },
   methods: {
@@ -129,6 +131,26 @@ export default {
     this.$watch("$route", this.findActiveLink, {
       immediate: true
     });
+    
+    if (localStorage.getItem('access_token')) {
+      try {
+        this.bearer = localStorage.getItem('access_token')
+      } catch (error) {
+        console.log(error)
+      }
+    }    
+
+    if (localStorage.getItem('access_token')) {
+      this.bearer = localStorage.getItem('access_token')
+    } else {
+      this.$router.push({ name: 'login' });
+    }
+
+    setTimeout(function() {
+      localStorage.removeItem('access_token')
+      this.$router.push({ name: 'login' });
+    }, 900000, this);
+
   }
 };
 </script>

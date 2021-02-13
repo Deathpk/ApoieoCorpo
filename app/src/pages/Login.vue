@@ -35,7 +35,7 @@ export default {
   data() {
     return {
         email: [],
-        password: []
+        password: [],
     }
   },
   methods: {
@@ -54,8 +54,7 @@ export default {
         })
         .then((response) => {
             
-            console.log(response)
-        
+            localStorage.setItem('access_token', response.data.access_token)
             setTimeout(() => {
                 loader.hide(),
                 this.$notify({
