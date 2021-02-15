@@ -1,8 +1,8 @@
 <template>
     <div id="home">
-        <nav class="navbar navbar-expand-sm fixed-top navbar-transparent">
-            <router-link class="navbar-brand text-white text-uppercase font-weight-bold ml-5" to="/home">Apoie o corpo</router-link>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-xl fixed-top navbar-transparent">
+            <router-link class="navbar-brand text-white text-uppercase font-weight-bold ml-5" to="/home"></router-link>
+            <button v-on:click="abrirNavBar()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
@@ -18,6 +18,15 @@
                 </div>
             </div>
         </nav>
+        <div id="mySidenav" class="sidenav">
+            <a class="closebtn" v-on:click="fecharNavBar()">&times;</a>
+            <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('home')">Home</a>
+            <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('sobre')">Sobre</a>
+            <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('servicos')">Serviços</a>
+            <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('contato')">Contato</a>
+            <router-link class="text-white text-uppercase font-weight-bold" to="/login">Login</router-link>
+            <router-link class="text-white text-uppercase font-weight-bold" to="/register">Cadastrar-se</router-link>
+        </div>
         <!-- Home -->
         <div id="hero-image">
             <div class="hero-text">
@@ -374,9 +383,16 @@ export default {
         } 
     },
     methods: {
+        fecharNavBar() {
+            document.getElementById("mySidenav").style.width = "0";
+        },
+        abrirNavBar() {
+            document.getElementById("mySidenav").style.width = "250px";
+        },
         scrollSmoothTo(elementId) {
             var element = document.getElementById(elementId);
             element.scrollIntoView({ block: 'start',  behavior: 'smooth' });
+            document.getElementById("mySidenav").style.width = "0";
         },
         sendFormulario() {
         
@@ -421,5 +437,52 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped>
+
+nav {
+    z-index: 2;
+}
+/* The side navigation menu */
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  /* font-size: 25px; */
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media (max-height: 1024px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
 </style>

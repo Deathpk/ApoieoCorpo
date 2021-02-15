@@ -186,8 +186,14 @@ html {
     align-items: flex-end !important;
 }
 
-.navbar-toggler {
-    border: 1px solid #372A26 !important;
+.navbar-toggler-icon {
+    display: block;
+    position: relative;
+    width: 30px;
+    height: 5px;
+    border-radius: 1px;
+    margin: 6px auto;
+    background: #03A9F4;
 }
 
 .navbar-toggler .navbar-toggler-bar {
@@ -262,7 +268,7 @@ html {
     cursor: pointer;
 }
 .navbar-toggler {
-    border: 1px solid #03A9F4 !important; 
+    border: 1px solid transparent !important; 
 }
 
 .navbar-toggler-icon {
