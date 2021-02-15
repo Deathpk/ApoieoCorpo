@@ -4,12 +4,15 @@
             <router-link class="navbar-brand text-white text-uppercase font-weight-bold ml-5" to="/home">Apoie o corpo</router-link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav col-md-6 ml-auto d-flex justify-content-space-evenly align-items-center">
-                    <a class="nav-item nav-link text-uppercase text-white font-weight-bold" href="#home">Home</a>
-                    <a class="nav-item nav-link text-uppercase text-white font-weight-bold" href="#sobre">Sobre</a>
-                    <a class="nav-item nav-link text-uppercase text-white font-weight-bold" href="#servicos">Serviços</a>
+                    <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('home')">Home</a>
+                    <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('sobre')">Sobre</a>
+                    <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('servicos')">Serviços</a>
+                    <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('contato')">Contato</a>
                     <router-link class="text-white text-uppercase font-weight-bold" to="/login">Login</router-link>
                     <router-link class="btn btn-blue text-white" to="/register">Cadastrar-se</router-link>
                 </div>
@@ -49,21 +52,23 @@
             </div>
         </div>
         <!-- Sobre -->
-        <div class="container">
-            <div class="row my-5">
-                <div class="col-md-12 d-block d-md-flex justify-content-center align-items-center">
-                    <div class="col-md-6 text-left">
-                        <h3 class="text-blue font-weight-bold">Sobre nós</h3>
-                        <p class="text-justify">
-                            Diante do cénario que estamos vivendo, em meio a essa pandemia muitos irmãos que possuem um négocio próprio estão passando por dificuldades para manter seu empreendimento em atividade , e até mesmo arcar com suas responsabilidades financeiras.
-                        </p>
-                    </div>
-                    <div class="col-md-6">
-                        <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="">                        
+        <section id="sobre">
+            <div class="container">
+                <div class="row my-5">
+                    <div class="col-md-12 d-block d-md-flex justify-content-center align-items-center">
+                        <div class="col-md-6 text-left">
+                            <h3 class="text-blue font-weight-bold">Sobre nós</h3>
+                            <p class="text-justify">
+                                Diante do cénario que estamos vivendo, em meio a essa pandemia muitos irmãos que possuem um négocio próprio estão passando por dificuldades para manter seu empreendimento em atividade , e até mesmo arcar com suas responsabilidades financeiras.
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="">                        
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
         <!-- Serviços -->
         <section class="position-relative" id="servicos">
             <div class="container">
@@ -202,7 +207,7 @@
             </div>
         </section>
         <!-- Produtos Impulsionados -->
-        <section class="position-relative mt-5" id="servicos">
+        <section class="position-relative" id="servicos">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
@@ -310,35 +315,29 @@
             </div>
         </section>
         <!-- Contato -->
-        <section>
+        <section id="contato"> 
             <div class="container">
                 <h1 class="text-center text-blue font-weight-bold">Contato</h1>
-                <p class="text-center text-blue mb-5">Entre em contato conosco para quais eventuais dúvidas</p>
+                <p class="text-center text-blue mb-5">Tem alguma dúvida? Entre em contato conosco para quais eventuais dúvidas</p>
             </div>
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-md-12 d-sm-flex justify-content-center align-items-center">
+                    <div class="col-md-12 d-sm-flex justify-content-center align-items-end">
                         <div class="col-md-4 text-left">
-                            <p class="font-weight-bold text-blue">Tem alguma dúvida? Entre em contato</p>
-                            <form action="" method="POST">
-                                <div class="form-group mx-sm-0 my-3">
-                                    <label for="inputNome" class="sr-only">Nome</label>
-                                    <input type="nome" class="form-control box-shadow" id="inputNome"
-                                        placeholder="Digite seu Nome" name="name">
+                            <form v-on:submit.prevent="sendFormulario">
+                                <div class="form-group mt-5 mb-4 text-left">
+                                    <label class="text-blue ml-2 font-weight-bold">Nome</label>
+                                    <input v-model="nome" type="text" class="form-control" required>
                                 </div>
-                                <div class="form-group mx-sm-0 my-3">
-                                    <label for="inputE-mail" class="sr-only">E-mail</label>
-                                    <input type="email" class="form-control box-shadow" id="inputE-mail"
-                                        placeholder="Digite seu E-mail" name="_replyto">
-                                </div> 
-                                <div class="form-group mx-sm-0 my-3">
-                                    <label for="inputMensagem" class="sr-only">Digite aqui a sua Mensagem</label>
-                                    <textarea class="form-control box-shadow" id="exampleFormControlTextarea1"
-                                        rows="3" name="message"></textarea>
+                                <div class="form-group mb-4 text-left">
+                                    <label class="text-blue ml-2 font-weight-bold">E-mail</label>
+                                    <input v-model="email" type="email" class="form-control" required>
                                 </div>
-                                <button type="submit"
-                                    class="btn btn-blue-border my-3 text-uppercase text-green font-weight-bold" value="Send">Enviar</button>
-
+                                <div class="form-group mb-4 text-left">
+                                    <label class="text-blue ml-2 font-weight-bold">Digite aqui a sua mensagem</label>
+                                    <textarea class="form-control" type="text" rows="3" name="message" v-model="mensagem" required></textarea>
+                                </div>
+                                <button class="btn btn-blue text-uppercase text-white font-weight-bold w-50 mb-5">Enviar</button>
                             </form>
                         </div>
                         <div class="col-md-6">
@@ -364,7 +363,62 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
+
 export default {
+    data() {
+        return {
+            nome: [],
+            email: [],
+            mensagem: []
+        } 
+    },
+    methods: {
+        scrollSmoothTo(elementId) {
+            var element = document.getElementById(elementId);
+            element.scrollIntoView({ block: 'start',  behavior: 'smooth' });
+        },
+        sendFormulario() {
+        
+            let loader = this.$loading.show({
+                container: this.fullPage ? null : this.$refs.formContainer,
+                canCancel: false,
+                onCancel: this.onCancel,
+            })
+
+            axios.post('/api/sendFormulario', 
+            {
+                nome: this.nome,
+                email: this.email,
+                mensagem: this.mensagem
+            })
+            .then((response) => {
+
+                setTimeout(() => {
+                    loader.hide(),
+                    this.$notify({
+                        message: 'Mensagem encaminhada com sucesso',
+                        type: 'success'
+                    })
+                }, 1000)   
+
+                this.nome = ''
+                this.email = ''
+                this.mensagem = ''
+                
+            })
+            .catch((error) => {
+                setTimeout(() => {
+                    loader.hide(),
+                    this.$notify({
+                        message: error.response.data.message,
+                        type: 'danger'
+                    })
+                },1000)  
+            })
+
+        }
+    }
 }
 </script>
 <style>

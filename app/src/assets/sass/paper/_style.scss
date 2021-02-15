@@ -65,9 +65,14 @@ a:hover, a:focus {
     text-decoration: underline;
 }
 
-input{
+input {
     color: #03A9F4 !important;
 }
+
+html {
+    scroll-behavior: smooth;
+}
+  
 
 .alert,
 .alert-danger {
@@ -97,7 +102,7 @@ input{
     background: #03A9F4;
     border-radius: 50px;
     border: 2px solid #03A9F4;
-    color: #FFFFFF;
+    color: #FFFFFF !important;
 }
 
 .btn-blue {
@@ -251,6 +256,17 @@ input{
 
 .form-control:focus {
     border: 2px solid #03A9F4;
+}
+
+.navbar-nav a {
+    cursor: pointer;
+}
+.navbar-toggler {
+    border: 1px solid #03A9F4 !important; 
+}
+
+.navbar-toggler-icon {
+    background: #03A9F4 !important;
 }
 
 
