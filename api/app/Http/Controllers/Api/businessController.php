@@ -28,12 +28,12 @@ class businessController extends Controller
                 'message'=> 'Erro ao cadastrar estabelecimento , tente novamente!',
                 'object'=> $e->getMessage(),
                 'error'=>true
-            ],422);//[Hutils::makeResponse('erro ao cadastrar estabelecimento,'.$e->getMessage(),true),422]
+            ],422);
         }
         return response()->json([
             'message'=> 'Estabelecimento cadastrado com sucesso!',
             'error'=>false
-        ],201); // [Hutils::makeResponse('Estabelecimento cadastrado com sucesso!',false),201]
+        ],201);
     }
 
 
@@ -65,28 +65,36 @@ class businessController extends Controller
 
     public function updateBusiness(Request $request)
     {
-        if($request->business != null){
-            $whatsAppLink = "https://api.whatsapp.com/send?1=pt_BR&phone=55";
-
-            postdataModel::where('ID','=',$request->business)->update([
-                'Nome'=>$request->nome,
-                'Descricao'=>$request->descricao,
-                'Contato'=>$request->contato,
-                'Instagram'=>$request->instagram,
-                'Facebook'=>$request->facebook,
-                'WhatsApp'=>$whatsAppLink.$request->whatsapp
-            ]);
-
+        $isBusinessFromUser = $this->validateBusinessId($request->business);
+        if($request->business != null && $isBusinessFromUser != false){
+            postdataModel::updateData($request);
             return response()->json([
                 'message'=>'Estabelecimento atualizado com sucesso!',
                 'error'=>false
             ],200);
         }
-
+        else if($isBusinessFromUser == false){
+            return response()->json([
+                'message'=>'Este estabelecimento não pertence ao usuário atualmente logado.',
+                'error'=>true
+            ],403);    
+        }
         return response()->json([
             'message'=>'Selecione ao menos um estabelecimento.',
             'error'=>true
         ],412);
+    }
+
+    public function validateBusinessId($businessId)
+    {
+        $business = postdataModel::where('ID' , '=' , $businessId)
+        ->where('UserID','=',Auth::user()->email)
+        ->get();
+        
+        if(empty($business[0])){
+            return false;
+        }
+        return true;
     }
     
 }
