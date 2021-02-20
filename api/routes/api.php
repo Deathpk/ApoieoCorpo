@@ -26,5 +26,9 @@ Route::group(['middleware'=>['apiJwt']],function(){
         Route::get('/get/all','Api\businessController@getAllUserPosts');
 
     });
+    Route::prefix('user')->group( function (){
+        Route::put('/update', 'Api\userController@updateUserInformation');
+        Route::delete('/delete', 'Api\userController@deleteUser');
+    });
 });
 

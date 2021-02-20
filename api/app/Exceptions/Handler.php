@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -50,6 +51,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        // verifica se a request vem de uma rota api/algumaRota.
+        if($request->is("api/*") && $exception instanceof ValidationException){
+            return response()->json([
+                'message' => 'Erro ao validar campos.',
+                'fields' => $exception->errors(),
+                'error' => true
+            ],$exception->status );
+        } 
         return parent::render($request, $exception);
     }
 }

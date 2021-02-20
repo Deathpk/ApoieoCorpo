@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers\Hutils;
 
 class postdataModel extends Model
 {
@@ -16,31 +17,24 @@ class postdataModel extends Model
     */
     public static function insertData($obj)
     {
-        
-        $whatsAppLink = null;
-        if ($obj->WhatsApp != null){
-            $whatsAppLink ="https://api.whatsapp.com/send?1=pt_BR&phone=55";
-        }
-        
+       $whatsAppLink = Hutils::createWhatsAppLink($obj->WhatsApp);
+       
        postdataModel::insert(['UserID'=>$obj->email, 'Ramo'=>$obj->Ramo, 'Nome'=>$obj->nomeEstabelecimento,
        'Descricao'=>$obj->Descricao, 'Estado'=>$obj->Estado, 'Cidade'=>$obj->Cidade, 'Contato'=>$obj->Contato , 
-       'Instagram'=>$obj->Instagram, 'Facebook'=>$obj->Facebook,'WhatsApp'=>$whatsAppLink.$obj->WhatsApp]);
+       'Instagram'=>$obj->Instagram, 'Facebook'=>$obj->Facebook,'WhatsApp'=>$whatsAppLink]);
     }
 
     public static function updateData($businessData)
     {
-        $whatsAppLink = "https://api.whatsapp.com/send?1=pt_BR&phone=55";
-        postdataModel::where('ID','=',$businessData->business)->update([
-            'Nome'=>$businessData->nome,
-            'Descricao'=>$businessData->descricao,
-            'Contato'=>$businessData->contato,
-            'Instagram'=>$businessData->instagram,
-            'Facebook'=>$businessData->facebook,
-            'WhatsApp'=>$whatsAppLink.$businessData->whatsapp
-        ]);
+        foreach ($businessData->except('business') as $key => $value){
+            postdataModel::where('ID','=',$businessData->business)->update([
+                $key => $value
+            ]);
+        }
     }
 
-    
-
-   
+    public static function deleteUserPosts($userEmail)
+    {   
+        postdataModel::where('UserID','=',$userEmail)->delete();
+    }
 }
