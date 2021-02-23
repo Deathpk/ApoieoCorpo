@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\postdataModel;
 use App\Helpers\Hutils;
+use App\Http\Requests\deleteBusinessRequest;
 use App\Http\Requests\registerBusinessRequest;
 use Exception;
-use Validator;
 
 class businessController extends Controller
 {
@@ -106,16 +106,53 @@ class businessController extends Controller
         }    
     }
 
+    public function deleteBusiness(deleteBusinessRequest $request)
+    {
+        try{
+            if( $request->id  && $this->validateBusinessId($request->id) ){
+                postdataModel::deleteUserPost($request->id);
+                return response()->json([
+                    'message'=> 'Anuncio apagado com sucesso!',
+                    'error' => false
+                ]);
+            }
+            return response()->json([
+                'message'=> 'Anuncio não pertence ao usuário logado!.',
+                'error' => true
+            ]);
+            
+        }catch (Exception $e){
+            return response()->json([
+                'message'=>'Erro ao deletar anuncio do usuário , tente novamente!.',
+                'object'=>$e->getMessage(),
+                'error'=>true
+            ],404);
+        }
+    }
+
+    /**
+    * Checa se um anuncio pertence realmente ao usuário logado no momento.
+    * @param integer $businessId
+    * @return bool
+    */
     public function validateBusinessId($businessId)
     {
-        $business = postdataModel::where('ID' , '=' , $businessId)
-        ->where('UserID','=',Auth::user()->email)
-        ->get();
-        
-        if(empty($business[0])){
-            return false;
+        try{
+            $business = postdataModel::where('ID' , '=' , $businessId)
+            ->where('UserID','=',Auth::user()->email)
+            ->get();
+            
+            if(empty($business[0])){
+                return false;
+            }
+            return true;
+        } catch (Exception $e){
+            return response()->json([
+                'message'=>'Erro ao deletar anuncio do usuário , tente novamente!.',
+                'object'=>$e->getMessage(),
+                'error'=>true
+            ],404);
         }
-        return true;
     }
     
 }

@@ -14,21 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::post('auth/register', 'Api\Auth\JWTAuthController@register');
 Route::post('auth/login', 'Api\Auth\JWTAuthController@login');
 
 Route::group(['middleware'=>['apiJwt']],function(){
     Route::post('auth/logout', 'Api\Auth\JWTAuthController@logout');
-    Route::prefix('business')->group(function (){
-        Route::post('/doRegister', 'Api\businessController@register');
-        Route::post('/update', 'Api\businessController@updateBusiness');
-        Route::get('/get/all','Api\businessController@getAllUserPosts');
 
+    Route::prefix('business')->group(function (){
+        Route::post('/register', 'Api\businessController@register');
+        Route::put('/update', 'Api\businessController@updateBusiness');
+        Route::get('/get/all','Api\businessController@getAllUserPosts');
+        Route::delete('/delete', 'Api\businessController@deleteBusiness');
     });
+
     Route::prefix('user')->group( function (){
         Route::put('/update', 'Api\userController@updateUserInformation');
         Route::delete('/delete', 'Api\userController@deleteUser');
     });
+
 });
 

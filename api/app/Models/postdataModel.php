@@ -33,8 +33,13 @@ class postdataModel extends Model
         }
     }
 
-    public static function deleteUserPosts($userEmail)
+    public static function deleteAllUserPosts($userEmail)
     {   
         postdataModel::where('UserID','=',$userEmail)->delete();
+    }
+
+    public static function deleteUserPost($businessId)
+    {
+        postdataModel::where('ID','=',$businessId)->delete();
     }
 }

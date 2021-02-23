@@ -47,7 +47,7 @@ class userController extends Controller
         try{
 
             if($request->id != null){
-                postdataModel::deleteUserPosts(Auth::user()->email); 
+                postdataModel::deleteAllUserPosts(Auth::user()->email); 
                 userModel::deleteUserAccount($request->id);
                 Auth::logout();
                 return response()->json([
