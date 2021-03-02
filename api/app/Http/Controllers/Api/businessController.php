@@ -10,6 +10,7 @@ use App\Helpers\Hutils;
 use App\Http\Requests\deleteBusinessRequest;
 use App\Http\Requests\registerBusinessRequest;
 use Exception;
+use DB;
 
 class businessController extends Controller
 {
@@ -153,6 +154,35 @@ class businessController extends Controller
                 'error'=>true
             ],404);
         }
+    }
+
+    public function searchForBusiness(Request $request)
+    {
+        $query = postdataModel::query();
+        if( count( $request->all()) ){
+            foreach($request->all() as $field => $value){
+                $query->where($field, 'LIKE', $value);
+            }
+            try{
+                $searchResult = $query->get();
+            } catch(Exception $e){
+                return response()->json([
+                    'message'=> 'Erro ao buscar anuncios com os parametros passados.',
+                    'object'=>$e->getMessage(),
+                    'error'=>true
+                ],404);
+            }
+            
+            return response()->json([
+                'message' => 'Resultados encontrados',
+                'object' => $searchResult,
+                'error' => false
+            ],200);
+        }
+        return response()->json([
+            'message' => 'Selecione ao menos um filtro para realizar a pesquisa.',
+            'error' => true
+        ],412);
     }
     
 }
