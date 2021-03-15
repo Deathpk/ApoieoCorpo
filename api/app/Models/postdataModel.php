@@ -33,6 +33,12 @@ class postdataModel extends Model
         }
     }
 
+    public static function getPostsCounter()
+    {
+        return postdataModel::all()->count();
+    }
+    
+
     public static function deleteAllUserPosts($userEmail)
     {   
         postdataModel::where('UserID','=',$userEmail)->delete();

@@ -10,7 +10,6 @@ use App\Helpers\Hutils;
 use App\Http\Requests\deleteBusinessRequest;
 use App\Http\Requests\registerBusinessRequest;
 use Exception;
-use DB;
 
 class businessController extends Controller
 {
@@ -183,6 +182,23 @@ class businessController extends Controller
             'message' => 'Selecione ao menos um filtro para realizar a pesquisa.',
             'error' => true
         ],412);
+    }
+
+    public function getBusinessCounter()
+    {
+        $businessCounter = postdataModel::getPostsCounter();
+        if($businessCounter > 0){
+            return response()->json([
+                'message' => 'Anuncios encontrados!',
+                'error' => false,
+                'object' => $businessCounter,
+            ]);
+        }
+        return response()->json([
+            'message' => 'Não foram encontrados Anuncios!',
+            'error' => false,
+            'object' => null
+        ]);
     }
     
 }

@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('auth/register', 'Api\Auth\JWTAuthController@register');
 Route::post('auth/login', 'Api\Auth\JWTAuthController@login');
+/* Contadores*/
+Route::get('user/counter','Api\userController@getUsersCounter');
+Route::get('business/counter', 'Api\businessController@getBusinessCounter');
 
 Route::group(['middleware'=>['apiJwt']],function(){
     Route::post('auth/logout', 'Api\Auth\JWTAuthController@logout');

@@ -66,4 +66,21 @@ class userController extends Controller
 
     }
 
+    public function getUsersCounter()
+    {
+        $usersCounter = userModel::getUsersCounter();
+        if($usersCounter > 0){
+            return response()->json([
+                'message' => 'Usuários encontrados!',
+                'error' => false,
+                'object' => $usersCounter
+            ]);
+        }
+        return response()->json([
+            'message' => 'Não foram encontrados Usuários!',
+            'error' => false,
+            'object' => null
+        ]);
+    }
+
 }
