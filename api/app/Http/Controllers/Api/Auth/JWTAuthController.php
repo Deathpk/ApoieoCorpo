@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
 use App\User;
+use Auth;
 use Exception;
 use App\Helpers\Hutils;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -81,7 +82,7 @@ class JWTAuthController extends Controller
                 'message'=>'Erro ao validar campos',
                 'fields'=> $validator->errors(),
                 'error'=>true
-            ],422);//Hutils::makeResponse('Erro ao validar campos',true,$validator->errors()), 422
+            ],422);
         }
 
         if (!$token = auth()->attempt($validator->validated())) {

@@ -192,13 +192,13 @@ class businessController extends Controller
                 'message' => 'Anuncios encontrados!',
                 'error' => false,
                 'object' => $businessCounter,
-            ]);
+            ],200);
         }
         return response()->json([
             'message' => 'Não foram encontrados Anuncios!',
             'error' => false,
             'object' => null
-        ]);
+        ],404);
     }
     
 }

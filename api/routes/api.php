@@ -20,6 +20,8 @@ Route::post('auth/login', 'Api\Auth\JWTAuthController@login');
 Route::get('user/counter','Api\userController@getUsersCounter');
 Route::get('business/counter', 'Api\businessController@getBusinessCounter');
 
+Route::post('contact/help', 'Api\contactController@sendContactMessage');
+
 Route::group(['middleware'=>['apiJwt']],function(){
     Route::post('auth/logout', 'Api\Auth\JWTAuthController@logout');
 

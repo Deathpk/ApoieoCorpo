@@ -74,13 +74,13 @@ class userController extends Controller
                 'message' => 'Usuários encontrados!',
                 'error' => false,
                 'object' => $usersCounter
-            ]);
+            ],200);
         }
         return response()->json([
             'message' => 'Não foram encontrados Usuários!',
             'error' => false,
             'object' => null
-        ]);
+        ],404);
     }
 
 }
