@@ -10,6 +10,7 @@ use App\Helpers\Hutils;
 use App\Http\Requests\deleteBusinessRequest;
 use App\Http\Requests\registerBusinessRequest;
 use Exception;
+use GuzzleHttp\Client;
 
 class businessController extends Controller
 {
@@ -72,7 +73,7 @@ class businessController extends Controller
         try{
             $isBusinessFromUser = $this->validateBusinessId($request->business);
 
-            if($isBusinessFromUser != false){
+            if( $isBusinessFromUser ){
                 if ($request->has('WhatsApp')){
                     $whatsAppLink = Hutils::createWhatsAppLink($request->WhatsApp);
                     $request->merge(['WhatsApp' => $whatsAppLink]);
@@ -83,7 +84,7 @@ class businessController extends Controller
                     'error'=>false
                 ],200);
             }
-            else if($isBusinessFromUser == false){
+            else if( !$isBusinessFromUser ){
                 return response()->json([
                     'message'=>'Este estabelecimento não pertence ao usuário atualmente logado.',
                     'error'=>true
@@ -157,6 +158,7 @@ class businessController extends Controller
 
     public function searchForBusiness(Request $request)
     {
+        // dd($request->all());
         $query = postdataModel::query();
         if( count( $request->all()) ){
             foreach($request->all() as $field => $value){
@@ -182,6 +184,55 @@ class businessController extends Controller
             'message' => 'Selecione ao menos um filtro para realizar a pesquisa.',
             'error' => true
         ],412);
+    }
+
+    /**
+     * Consome a API do IBGE com Guzzle Http , trazendo todas as UFS do País.
+     * @return JsonResponse
+     */
+    public function getListOfUfs()
+    {
+        $client = new Client();
+        $url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome";
+        try{
+            $response = $client->request('GET', $url);
+        } catch(Exception $e){
+            return response()->json([
+                'message'=> 'Oops... Houve um erro ao buscar dados nessa api.',
+                'object'=>$e->getMessage(),
+                'error'=>true
+            ],404);
+        }
+        
+        $responseBody = json_decode($response->getBody());
+        return response()->json([
+            'message' => 'Resultados Encontrados.',
+            'object' => $responseBody,
+            'error' => false
+        ]);
+    }
+
+    public function getMunicipiosByUf($ufCode)
+    {
+        $client = new Client();
+        $url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/".$ufCode."/municipios?orderBy=nome";
+
+        try{
+            $response = $client->request('GET', $url);
+        } catch(Exception $e){
+            return response()->json([
+                'message'=> 'Oops... Houve um erro ao buscar dados nessa api.',
+                'object'=>$e->getMessage(),
+                'error'=>true
+            ],404);
+        }
+
+        $responseBody = json_decode($response->getBody());
+        return response()->json([
+            'message' => 'Resultados Encontrados.',
+            'object' => $responseBody,
+            'error' => false
+        ]);
     }
 
     public function getBusinessCounter()

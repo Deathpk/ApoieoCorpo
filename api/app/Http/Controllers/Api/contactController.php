@@ -32,5 +32,4 @@ class contactController extends Controller
             'error' => false
         ],200);
     }
-    
 }
