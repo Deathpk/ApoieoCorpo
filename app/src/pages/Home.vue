@@ -1,7 +1,9 @@
 <template>
     <div id="home">
         <nav class="navbar navbar-expand-xl fixed-top navbar-transparent">
-            <router-link class="navbar-brand text-white text-uppercase font-weight-bold ml-5" to="/home"></router-link>
+            <router-link class="navbar-brand text-white text-uppercase font-weight-bold ml-5" to="/home">
+                <img src="../assets/img/ac.png" alt="Apoie o Corpo" class="img-fluid w-25 h-25">
+            </router-link>
             <button v-on:click="abrirNavBar()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
@@ -9,22 +11,22 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav col-md-6 ml-auto d-flex justify-content-space-evenly align-items-center">
-                    <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('home')">Home</a>
-                    <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('sobre')">Sobre</a>
-                    <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('servicos')">Serviços</a>
-                    <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('contato')">Contato</a>
-                    <router-link class="text-white text-uppercase font-weight-bold" to="/login">Login</router-link>
+                    <a class="un nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('home')">Home</a>
+                    <a class="un nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('sobre')">Sobre</a>
+                    <a class="un nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('servicos')">Serviços</a>
+                    <a class="un nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('contato')">Contato</a>
+                    <router-link class="un nav-link text-uppercase text-white font-weight-bold" to="/login">Login</router-link>
                     <router-link class="btn btn-blue text-white" to="/register">Cadastrar-se</router-link>
                 </div>
             </div>
         </nav>
         <div id="mySidenav" class="sidenav">
             <a class="closebtn" v-on:click="fecharNavBar()">&times;</a>
-            <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('home')">Home</a>
-            <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('sobre')">Sobre</a>
-            <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('servicos')">Serviços</a>
-            <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('contato')">Contato</a>
-            <router-link class="text-white text-uppercase font-weight-bold" to="/login">Login</router-link>
+            <a class="un nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('home')">Home</a>
+            <a class="un nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('sobre')">Sobre</a>
+            <a class="un nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('servicos')">Serviços</a>
+            <a class="un nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('contato')">Contato</a>
+            <router-link class="un nav-link text-uppercase text-white font-weight-bold" to="/login">Login</router-link>
             <router-link class="text-white text-uppercase font-weight-bold" to="/register">Cadastrar-se</router-link>
         </div>
         <!-- Home -->
@@ -32,7 +34,7 @@
             <div class="hero-text">
                 <h2 class="text-uppercase text-white font-weight-bold">Seja bem-vindo ao <br><span class="text-blue">apoie o corpo</span></h2>
                 <p class="text-white">Entre em contato com todos os anunciantes cadastrados <br> e ajude a economia local</p>
-                <form @submit.prevent>
+                <!-- <form @submit.prevent>
                   <div class="row">
                       <div class="col-md-12 d-block d-xl-flex justify-content-center align-items-center border-grey">
                         <div class="col-12 col-xl-3 my-2">
@@ -57,7 +59,7 @@
                         </div>
                       </div>
                   </div>
-                </form>
+                </form> -->
             </div>
         </div>
         <!-- Sobre -->
@@ -215,114 +217,6 @@
                 </div>
             </div>
         </section>
-        <!-- Produtos Impulsionados -->
-        <section class="position-relative" id="servicos">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <h2 class="text-blue font-weight-bold">Serviços Impulsionados</h2>
-                        <p>Serviços impulsionados devido a sua causa e razão <br> social por aqueles cadastrados</p>    
-                    </div>  
-
-                    <div id="carousel-right" class="container">
-                        <div class="row h-100">
-                            <div class="col-md-12 justify-content-center align-items-center text-center">                    
-                                <carousel :per-page="1" :page-change="1" :scrollPerPage="false" :speed="1000">
-                                    <slide>
-                                        <div class="card col-md-11 float-right mx-2">
-                                            <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="Casa 1">
-                                            <div class="card-body">
-                                                <div class="text-left">
-                                                    <p class="text-blue font-weight-bold">Lorem ipsum dolor</p>
-                                                    <span class="border d-flex"></span>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <span class="d-flex">
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    </span>
-                                                    <span class="border d-flex"></span>
-                                                    <span class="d-flex justify-content-space-around align-items-center">
-                                                        <p class="mt-3 text-blue">R$ 200</p>
-                                                        <button class="btn btn-blue font-weight-bold text-white text-uppercase">Saiba Mais</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </slide>
-                                    <slide>
-                                        <div class="card col-md-11 float-right mx-2">
-                                            <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="Casa 1">
-                                            <div class="card-body">
-                                                <div class="text-left">
-                                                    <p class="text-blue font-weight-bold">Lorem ipsum dolor</p>
-                                                    <span class="border d-flex"></span>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <span class="d-flex">
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    </span>
-                                                    <span class="border d-flex"></span>
-                                                    <span class="d-flex justify-content-space-around align-items-center">
-                                                        <p class="mt-3 text-blue">R$ 200</p>
-                                                        <button class="btn btn-blue font-weight-bold text-white text-uppercase">Saiba Mais</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </slide>
-                                    <slide>
-                                        <div class="card col-md-11 float-right mx-2">
-                                            <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="Casa 1">
-                                            <div class="card-body">
-                                                <div class="text-left">
-                                                    <p class="text-blue font-weight-bold">Lorem ipsum dolor</p>
-                                                    <span class="border d-flex"></span>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <span class="d-flex">
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    </span>
-                                                    <span class="border d-flex"></span>
-                                                    <span class="d-flex justify-content-space-around align-items-center">
-                                                        <p class="mt-3 text-blue">R$ 200</p>
-                                                        <button class="btn btn-blue font-weight-bold text-white text-uppercase">Saiba Mais</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </slide>
-                                    <slide>
-                                        <div class="card col-md-11 float-right mx-2">
-                                            <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="Casa 1">
-                                            <div class="card-body">
-                                                <div class="text-left">
-                                                    <p class="text-blue font-weight-bold">Lorem ipsum dolor</p>
-                                                    <span class="border d-flex"></span>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <span class="d-flex">
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    </span>
-                                                    <span class="border d-flex"></span>
-                                                    <span class="d-flex justify-content-space-around align-items-center">
-                                                        <p class="mt-3 text-blue">R$ 200</p>
-                                                        <button class="btn btn-blue font-weight-bold text-white text-uppercase">Saiba Mais</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </slide>
-                                </carousel>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
         <!-- Contato -->
         <section id="contato"> 
             <div class="container">
@@ -402,7 +296,7 @@ export default {
                 onCancel: this.onCancel,
             })
 
-            axios.post('/api/sendFormulario', 
+            axios.post('/api/contact/help', 
             {
                 nome: this.nome,
                 email: this.email,
@@ -484,5 +378,30 @@ nav {
 @media (max-height: 1024px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+/* Aqui vai a transição dos links do navbar */
+.un {
+	display: inline-block;
+	position: relative;
+	padding-bottom: 3px;
+  margin-right: 10px;
+}
+.un:last-child {
+  margin-right: 0;
+}
+
+.un:after {
+	content: '';
+	display: block;
+	margin: auto;
+	height: 3px;
+	width: 0px;
+	background: transparent;
+	transition: width .5s ease, background-color .5s ease;
+}
+.un:hover:after {
+	width: 100%;
+	background: #FFFFFF;
 }
 </style>

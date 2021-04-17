@@ -17,7 +17,7 @@
                      title="Configurações"
                      title-classes="nav-link"
                      icon="ti-settings">
-            <router-link :to="{ path: '/profile' }" class="dropdown-item">Perfil</router-link>
+            <!-- <router-link :to="{ path: '/profile' }" class="dropdown-item">Perfil</router-link> -->
             <a class="dropdown-item" v-on:click="logout()">Sair</a>
           </drop-down>
         </ul>

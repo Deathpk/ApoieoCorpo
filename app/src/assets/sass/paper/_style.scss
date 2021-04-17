@@ -156,6 +156,15 @@ html {
     border: 2px solid #03A9F4;
 }
 
+.fa-whatsapp, 
+.fa-facebook,
+.fa-instagram {
+    font-size: 27px;
+    width: 36px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
 .VueCarousel-dot {
     height: 1.25rem !important;
     width: 1.25rem !important;
@@ -253,10 +262,10 @@ html {
 
 .form-control {
     background-color: #fff;
-    color: #495057;
+    color: #03A9F4 !important;
     background-color: #fff;
     border: 2px solid #03A9F4;
-    border-radius: 20px;
+    border-radius: 3px;
     outline: 0;
 }
 

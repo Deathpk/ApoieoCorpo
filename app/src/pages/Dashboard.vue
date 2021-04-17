@@ -1,196 +1,107 @@
 <template>
-  <div>
-
-    <!--Stats cards-->
+  <div>    
     <div class="row">
-      <div class="col-md-6 col-xl-3" v-for="stats in statsCards" :key="stats.title">
+      <div class="col-md-6 col-xl-3" v-for="servico in servicos" :key="servico.ID">
         <stats-card>
-          <div class="icon-big text-center" :class="`icon-${stats.type}`" slot="header">
-            <i :class="stats.icon"></i>
+          <div class="icon-big text-center" :class="`icon-${statsCards.type}`" slot="header">
+            <i :class="statsCards.icon"></i>
           </div>
           <div class="numbers" slot="content">
-            <p>{{stats.title}}</p>
-            {{stats.value}}
+            <p>{{ servico.Estado }}, {{ servico.Cidade }}</p>
+            <h5>{{ servico.Nome }}</h5>
+            <p>{{ servico.Descricao }}</p>
           </div>
           <div class="stats" slot="footer">
-            <i :class="stats.footerIcon"></i> {{stats.footerText}}
+            <!-- <span v-if="servico.sin_ativo == 'S'"> -->
+
+              <span class="d-flex">
+                <span>
+                  <i :class="statsCards.ativado"></i> <span class="text-dark font-weight-bold">Ramo:</span> {{ servico.Ramo }} <br>
+                  <i :class="statsCards.ativado"></i> <span class="text-dark font-weight-bold">E-mail:</span> {{ servico.Contato }} <br>
+                  <span v-if="!(servico.WhatsApp == null)"><i :class="statsCards.ativado"></i> <span class="text-dark font-weight-bold">WhatsApp:</span><a :href="servico.WhatsApp" target="_blank" class="text-green"> WhatsApp</a></span> <br>                  
+                  <span v-if="!(servico.Facebook == null)"><i :class="statsCards.ativado"></i> <span  v-if="!(servico.WhatsApp == null)" class="text-dark font-weight-bold">Facebook:</span><a :href="servico.Facebook" target="_blank" class="text-blue"> Facebook</a></span> <br>                  
+                  <span v-if="!(servico.Instagram == null)"><i :class="statsCards.ativado"></i> <span v-if="!(servico.WhatsApp == null)" class="text-dark font-weight-bold">Instagram:</span><a :href="servico.Instagram" target="_blank" class="text-purple"> Instagram</a></span> <br>  
+                </span>
+              </span>
+              <!-- Botões -->
+              <button class="btn mr-1 mt-1" v-on:click="editar(servico.ID)">Editar <i class="fa fa-edit"></i></button>
+              <!-- <button class="btn mr-1 mt-1" :to="{ path:'/editar', params: { id: servico.ID } }" title="Editar serviço"><i class="fa fa-edit"></i></button> -->
+              <!-- <button class="btn mx-1" @click="desativar(servico.id)" title="Desativar serviço"><i class="fa fa-times-circle"></i></button>
+              <button class="btn mx-1" disabled @click="ativar(servico.id)" title="Ativar serviço"><i class="fa fa-check-circle"></i></button>
+              <button class="btn mx-1" @click="excluir(servico.id)" title="Excluir serviço"><i class="fa fa-trash-alt"></i></button> -->
+            <!-- </span> -->
+            
+            <!-- <span v-if="servico.sin_ativo == 'N'"><i :class="statsCards.inativado"></i> <span class="text-dark font-weight-bold">Status:</span> Inativado <br> -->
+              <!-- Atualização -->
+              <!-- <i class="ti-timer mb-2"></i> <span class="text-dark font-weight-bold">Última atualização em:</span> {{servico.updated_at}} <br> -->
+              <!-- Botões -->
+              <!-- <button class="btn mr-1 mt-1" disabled :to="{ name:'serviço/alterar', params: { id: servico.id } }" title="Alterar serviço"><i class="far fa-edit"></i></button>
+              <button class="btn mx-1" disabled @click="desativar(servico.id)" title="Desativar serviço"><i class="far fa-times-circle"></i></button>
+              <button class="btn mx-1" @click="ativar(servico.id)" title="Ativar serviço"><i class="far fa-check-circle"></i></button>
+              <button class="btn mx-1" @click="excluir(servico.id)" title="Excluir serviço"><i class="far fa-trash-alt"></i></button>            
+            </span>  -->
           </div>
         </stats-card>
       </div>
     </div>
-
-    <!--Charts-->
-    <div class="row">
-
-      <div class="col-12">
-        <chart-card title="Users behavior"
-                    sub-title="24 Hours performance"
-                    :chart-data="usersChart.data"
-                    :chart-options="usersChart.options">
-          <span slot="footer">
-            <i class="ti-reload"></i> Updated 3 minutes ago
-          </span>
-          <div slot="legend">
-            <i class="fa fa-circle text-info"></i> Open
-            <i class="fa fa-circle text-danger"></i> Click
-            <i class="fa fa-circle text-warning"></i> Click Second Time
-          </div>
-        </chart-card>
-      </div>
-
-      <div class="col-md-6 col-12">
-        <chart-card title="Email Statistics"
-                    sub-title="Last campaign performance"
-                    :chart-data="preferencesChart.data"
-                    chart-type="Pie">
-          <span slot="footer">
-            <i class="ti-timer"></i> Campaign set 2 days ago</span>
-          <div slot="legend">
-            <i class="fa fa-circle text-info"></i> Open
-            <i class="fa fa-circle text-danger"></i> Bounce
-            <i class="fa fa-circle text-warning"></i> Unsubscribe
-          </div>
-        </chart-card>
-      </div>
-
-      <div class="col-md-6 col-12">
-        <chart-card title="2015 Sales"
-                    sub-title="All products including Taxes"
-                    :chart-data="activityChart.data"
-                    :chart-options="activityChart.options">
-          <span slot="footer">
-            <i class="ti-check"></i> Data information certified
-          </span>
-          <div slot="legend">
-            <i class="fa fa-circle text-info"></i> Tesla Model S
-            <i class="fa fa-circle text-warning"></i> BMW 5 Series
-          </div>
-        </chart-card>
-      </div>
-
-    </div>
-
+    <router-link class="btn btn-blue" to="/servico/cadastro">Adicionar novo</router-link>
   </div>
 </template>
 <script>
-import { StatsCard, ChartCard } from "@/components/index";
-import Chartist from 'chartist';
+import axios from 'axios'
+import { StatsCard } from "@/components/index"
+import Chartist from 'chartist'
 export default {
   components: {
-    StatsCard,
-    ChartCard
+    StatsCard
   },
-  /**
-   * Chart data used to render stats, charts. Should be replaced with server data
-   */
   data() {
     return {
-      statsCards: [
-        {
-          type: "warning",
-          icon: "ti-server",
-          title: "Capacity",
-          value: "105GB",
-          footerText: "Updated now",
-          footerIcon: "ti-reload"
-        },
-        {
-          type: "success",
-          icon: "ti-wallet",
-          title: "Revenue",
-          value: "$1,345",
-          footerText: "Last day",
-          footerIcon: "ti-calendar"
-        },
-        {
-          type: "danger",
-          icon: "ti-pulse",
-          title: "Errors",
-          value: "23",
-          footerText: "In the last hour",
-          footerIcon: "ti-timer"
-        },
-        {
-          type: "info",
-          icon: "ti-twitter-alt",
-          title: "Followers",
-          value: "+45",
-          footerText: "Updated now",
-          footerIcon: "ti-reload"
-        }
-      ],
-      usersChart: {
-        data: {
-          labels: [
-            "9:00AM",
-            "12:00AM",
-            "3:00PM",
-            "6:00PM",
-            "9:00PM",
-            "12:00PM",
-            "3:00AM",
-            "6:00AM"
-          ],
-          series: [
-            [287, 385, 490, 562, 594, 626, 698, 895, 952],
-            [67, 152, 193, 240, 387, 435, 535, 642, 744],
-            [23, 113, 67, 108, 190, 239, 307, 410, 410]
-          ]
-        },
-        options: {
-          low: 0,
-          high: 1000,
-          showArea: true,
-          height: "245px",
-          axisX: {
-            showGrid: false
-          },
-          lineSmooth: Chartist.Interpolation.simple({
-            divisor: 3
-          }),
-          showLine: true,
-          showPoint: false
-        }
-      },
-      activityChart: {
-        data: {
-          labels: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "Mai",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec"
-          ],
-          series: [
-            [542, 543, 520, 680, 653, 753, 326, 434, 568, 610, 756, 895],
-            [230, 293, 380, 480, 503, 553, 600, 664, 698, 710, 736, 795]
-          ]
-        },
-        options: {
-          seriesBarDistance: 10,
-          axisX: {
-            showGrid: false
-          },
-          height: "245px"
-        }
-      },
-      preferencesChart: {
-        data: {
-          labels: ["62%", "32%", "6%"],
-          series: [62, 32, 6]
-        },
-        options: {}
+      user: '',
+      servicos: [],
+      statsCards: {
+        icon: "ti-view-grid",
+        ativado: "ti-check",
+        inativado: "ti-na",
+        atualizacao: "ti-timer"
       }
+      ,
     };
+  },  
+  created() {
+    this.pegar();
+  },
+  methods: {
+    pegar() {   
+      let loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.formContainer,
+        canCancel: false,
+        onCancel: this.onCancel,
+      })
+      axios.get('/api/business/get/all', {
+        headers: { 
+          Authorization: 'Bearer ' + localStorage.getItem('access_token')
+        } 
+      }).then((response) => {
+        this.servicos = response.data.userPosts    
+        setTimeout(() => {
+          loader.hide(),
+          this.$notify({
+            message: 'Serviços carregados com sucesso.',
+            type: 'success'
+          })
+        },1000)
+      })
+      .catch((error) => {  
+        setTimeout(() => {
+          loader.hide(),
+          this.$notify({
+            message: error.response.data.message,
+            type: 'danger'
+          })
+        },1000)
+      })
+    },
   }
 };
 </script>
-<style>
-</style>
