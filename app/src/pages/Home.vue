@@ -151,23 +151,25 @@
                     <div class="col-md-12 my-5 d-block d-lg-flex justify-content-center align-items-center">
                         <div class="col-lg-3 text-center">
                             <img src="../assets/img/home/icon_1.png" alt="">
-                            <h2 class="text-blue font-weight-bold">1000</h2>
+                            <h2 class="text-blue font-weight-bold">
+                                <ICountUp
+                                    :delay="delay"
+                                    :endVal="contador_posts"
+                                    :options="options"
+                                />
+                            </h2>
                             <h2 class="text-white font-weight-bold">Anúncios</h2>
                         </div>
                         <div class="col-lg-3 text-center">
-                            <img src="../assets/img/home/icon_2.png" alt="">
-                            <h2 class="text-blue font-weight-bold">1000</h2>
-                            <h2 class="text-white font-weight-bold">Localizações</h2>
-                        </div>
-                        <div class="col-lg-3 text-center">
                             <img src="../assets/img/home/icon_3.png" alt="">
-                            <h2 class="text-blue font-weight-bold">1000</h2>
+                            <h2 class="text-blue font-weight-bold">
+                                <ICountUp
+                                    :delay="delay"
+                                    :endVal="contador_users"
+                                    :options="options"
+                                />
+                            </h2>
                             <h2 class="text-white font-weight-bold">Membros</h2>
-                        </div>
-                        <div class="col-lg-3 text-center">
-                            <img src="../assets/img/home/icon_4.png" alt="">
-                            <h2 class="text-blue font-weight-bold">1000</h2>
-                            <h2 class="text-white font-weight-bold">Impulsionados</h2>
                         </div>
                     </div>
                 </div>
@@ -223,6 +225,7 @@
 </template>
 <script>
 import axios from 'axios'
+import ICountUp from 'vue-countup-v2';
 
 export default {
     data() {
@@ -230,13 +233,32 @@ export default {
             nome: [],
             email: [],
             mensagem: [],
-            posts: []
+            posts: [],
+            info: [],
+            contador_users: 0,
+            contador_posts: 0,
+            delay: 1000,
+            options: {
+                useEasing: true,
+                useGrouping: true,
+                separator: ',',
+                decimal: '.',
+                prefix: '',
+                suffix: ''
+            }
         } 
+    },
+    components: {
+      ICountUp
     },
     mounted () {
         this.getUsersPosts()
+        this.getUsersCounter()
     },
     methods: {
+        theFormat(number) {
+            return number.toFixed(2);
+        },
         fecharNavBar() {
             document.getElementById("mySidenav").style.width = "0";
         },
@@ -301,7 +323,40 @@ export default {
 
                 this.posts = response.data.object.data
 
-                console.log(this.posts)
+                setTimeout(() => {
+                    loader.hide()
+                },1000)  
+                
+            })
+            .catch((error) => {
+                setTimeout(() => {
+                    loader.hide(),
+                    this.$notify({
+                        message: error.response.data.message,
+                        type: 'danger'
+                    })
+                },1000)  
+            })
+
+        },
+        getUsersCounter() {
+        
+            let loader = this.$loading.show({
+                container: this.fullPage ? null : this.$refs.formContainer,
+                canCancel: false,
+                onCancel: this.onCancel,
+            })
+
+            axios.get('/api/user/counter')
+            .then((response) => {
+
+                this.info = response.data.object
+
+                this.contador_posts = this.info.Posts
+                this.contador_posts = parseInt(this.contador_posts.toString())
+                
+                this.contador_users = this.info.Users
+                this.contador_users = parseInt(this.contador_users.toString())
 
                 setTimeout(() => {
                     loader.hide()
