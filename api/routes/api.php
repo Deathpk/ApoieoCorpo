@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('auth/register', 'Api\Auth\JWTAuthController@register');
 Route::post('auth/login', 'Api\Auth\JWTAuthController@login');
+Route::post('auth/reset', 'Api\Auth\JWTAuthController@sendPasswordReset');
 /* Contadores*/
 Route::get('user/counter','Api\userController@getUsersCounter');
 Route::get('user/posts','Api\userController@getUsersPosts');

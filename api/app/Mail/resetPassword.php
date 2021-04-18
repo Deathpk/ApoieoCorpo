@@ -29,9 +29,9 @@ class contactMessage extends Mailable
      */
     public function build()
     {
-        $this->subject('Suporte Apoie o Corpo');
+        $this->subject('Resetar senha Apoie o Corpo');
         $this->to('bettercallmiguel@gmail.com');
-        $this->from($this->user['email'], $this->user['nome']);
+        $this->from('bettercallmiguel@gmail.com', 'Apoie o Corpo');
 
         return $this->markdown('mail.contactMessage',[
             'email'=>$this->user['email'],

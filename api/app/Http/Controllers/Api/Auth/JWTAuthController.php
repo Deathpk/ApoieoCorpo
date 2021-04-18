@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
 use App\User;
+use App\Models\userModel;
 use Auth;
 use Exception;
 use App\Helpers\Hutils;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Mail\resetPassword;
 
 class JWTAuthController extends Controller
 {
@@ -20,7 +22,7 @@ class JWTAuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register','sendPasswordReset']]);
     }
 
     /**
@@ -91,6 +93,7 @@ class JWTAuthController extends Controller
                 'error'=>true
             ],401); // tratar a exception de erro de senha errada. Hutils::makeResponse('Erro ao fazer login , tente novamente! ',true), 401
         }
+        // dd($token);
         return $this->createNewToken($token);
     }
 
@@ -105,6 +108,30 @@ class JWTAuthController extends Controller
         return response()->json(['message' => 'Deslogado com sucesso!']);
     }
 
+
+    public function sendPasswordReset(Request $request)
+    {
+        if( $this->isEmailRegistered($request->email) ){
+            // Criar o token para utilizar uma vez.
+
+        }
+    }
+
+
+    /**
+     * Se o e-mail existir no banco retorna true.
+     * @param Object
+     * @return Boolean
+     */
+    public function isEmailRegistered($email)
+    {
+        $email = User::where('email',$email)->first('email');
+        if($email){
+           return true;
+        }
+        return false;
+    }
+
     /**
     * Get the token array structure.
     *
@@ -114,8 +141,10 @@ class JWTAuthController extends Controller
     */
     protected function createNewToken($token)
     {
+        $userName = userModel::getUserName();
         return response()->json([
             'message'=>'Login efetuado com sucesso!',
+            'user'=> $userName->name,
             'error'=>false,
             'access_token' => $token,
             'token_type' => 'bearer',
