@@ -6,7 +6,7 @@
         <sidebar-link to="/servico" name="Servico" icon="ti-panel"/>
       </template>
       <mobile-menu>
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav">
           <drop-down class="nav-item"
                      title="Configurações"
                      title-classes="nav-link"

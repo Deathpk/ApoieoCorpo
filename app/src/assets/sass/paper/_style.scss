@@ -167,6 +167,11 @@ html {
     border: 2px solid #03A9F4;
 }
 
+.dropup .dropdown-toggle:after, 
+.dropdown .dropdown-toggle:after {
+    display: none;
+}
+
 .fa-whatsapp, 
 .fa-facebook,
 .fa-instagram {

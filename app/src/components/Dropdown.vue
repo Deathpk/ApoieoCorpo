@@ -4,7 +4,7 @@
              :class="{show:isOpen}"
              @click="toggleDropDown"
              v-click-outside="closeDropDown">
-    <a class="dropdown-toggle btn-rotate"
+    <a class="dropdown-toggle btn-rotate d-flex align-items-center"
        :class="titleClasses"
        data-toggle="dropdown">
       <slot name="title">

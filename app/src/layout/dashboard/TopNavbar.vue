@@ -14,9 +14,9 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <drop-down class="nav-item"
-                     title="Configurações"
+                     title=""
                      title-classes="nav-link"
-                     icon="ti-settings">
+                     icon="fa fa-ellipsis-v">
             <!-- <router-link :to="{ path: '/profile' }" class="dropdown-item">Perfil</router-link> -->
             <a class="dropdown-item" v-on:click="logout()">Sair</a>
           </drop-down>
