@@ -37,7 +37,11 @@ class postdataModel extends Model
     {
         return postdataModel::all()->count();
     }
-    
+
+    public static function getUsersPosts()
+    {
+        return postdataModel::paginate(10);
+    }    
 
     public static function deleteAllUserPosts($userEmail)
     {   

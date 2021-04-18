@@ -1,9 +1,7 @@
 <template>
     <div id="home">
         <nav class="navbar navbar-expand-xl fixed-top navbar-transparent">
-            <router-link class="navbar-brand text-white text-uppercase font-weight-bold ml-5" to="/home">
-                <img src="../assets/img/ac.png" alt="Apoie o Corpo" class="img-fluid w-25 h-25">
-            </router-link>
+            <img src="../assets/img/ac.png" alt="Apoie o Corpo" class="img-fluid ml-4" width="112" height="112">
             <button v-on:click="abrirNavBar()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
@@ -93,84 +91,42 @@
                         <div class="row h-100">
                             <div class="col-md-12 justify-content-center align-items-center text-center">                    
                                 <carousel :per-page="1" :page-change="1" :scrollPerPage="false" :speed="1000">
-                                    <slide>
+                                    <slide v-for="(post, i) in posts" :key="i">
                                         <div class="card col-md-11 float-right mx-2">
                                             <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="Casa 1">
                                             <div class="card-body">
                                                 <div class="text-left">
-                                                    <p class="text-blue font-weight-bold">Lorem ipsum dolor</p>
+                                                    <p class="text-blue font-weight-bold">Ramo: {{ post.Ramo }}</p>
                                                     <span class="border d-flex"></span>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
+                                                    <p class="text-blue mt-3">Nome: {{ post.Nome }}</p>
+                                                    <p class="text-blue mt-3">Descrição: {{ post.Descricao }}</p>
+                                                    <p class="text-blue mt-3">Contato: {{ post.Contato }}</p>
+                                                    <p class="text-blue mt-3">Estado: {{ post.Estado }}</p>
+                                                    <p class="text-blue mt-3">Cidade: {{ post.Cidade }}</p>
                                                     <span class="d-flex">
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    </span>
-                                                    <span class="border d-flex"></span>
-                                                    <span class="d-flex justify-content-space-around align-items-center">
-                                                        <p class="mt-3 text-blue">R$ 200</p>
-                                                        <button class="btn btn-blue font-weight-bold text-white text-uppercase">Saiba Mais</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </slide>
-                                    <slide>
-                                        <div class="card col-md-11 float-right mx-2">
-                                            <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="Casa 1">
-                                            <div class="card-body">
-                                                <div class="text-left">
-                                                    <p class="text-blue font-weight-bold">Lorem ipsum dolor</p>
-                                                    <span class="border d-flex"></span>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <span class="d-flex">
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    </span>
-                                                    <span class="border d-flex"></span>
-                                                    <span class="d-flex justify-content-space-around align-items-center">
-                                                        <p class="mt-3 text-blue">R$ 200</p>
-                                                        <button class="btn btn-blue font-weight-bold text-white text-uppercase">Saiba Mais</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </slide>
-                                    <slide>
-                                        <div class="card col-md-11 float-right mx-2">
-                                            <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="Casa 1">
-                                            <div class="card-body">
-                                                <div class="text-left">
-                                                    <p class="text-blue font-weight-bold">Lorem ipsum dolor</p>
-                                                    <span class="border d-flex"></span>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <span class="d-flex">
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    </span>
-                                                    <span class="border d-flex"></span>
-                                                    <span class="d-flex justify-content-space-around align-items-center">
-                                                        <p class="mt-3 text-blue">R$ 200</p>
-                                                        <button class="btn btn-blue font-weight-bold text-white text-uppercase">Saiba Mais</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </slide>
-                                    <slide>
-                                        <div class="card col-md-11 float-right mx-2">
-                                            <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="Casa 1">
-                                            <div class="card-body">
-                                                <div class="text-left">
-                                                    <p class="text-blue font-weight-bold">Lorem ipsum dolor</p>
-                                                    <span class="border d-flex"></span>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <span class="d-flex">
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
+                                                        <span class="d-flex">
+                                                            <span v-if="!(post.WhatsApp == null)">
+                                                            <a :href="post.WhatsApp" target="_blank" class="text-green">
+                                                                <i class="fa fa-whatsapp"></i>
+                                                            </a>
+                                                            </span><br>                  
+
+                                                            <span v-if="!(post.Facebook == null)">
+                                                            <span  v-if="!(post.WhatsApp == null)" class="text-dark font-weight-bold">
+                                                                <a :href="post.Facebook" target="_blank" class="text-blue">
+                                                                <i class="fa fa-facebook"></i>
+                                                                </a>
+                                                            </span>  
+                                                            </span><br>                  
+
+                                                            <span v-if="!(post.Instagram == null)">
+                                                            <span v-if="!(post.WhatsApp == null)" class="text-dark font-weight-bold">
+                                                                <a :href="post.Instagram" target="_blank" class="text-purple">
+                                                                <i class="fa fa-instagram"></i>
+                                                                </a>
+                                                            </span>
+                                                            </span><br>
+                                                        </span>
                                                     </span>
                                                     <span class="border d-flex"></span>
                                                     <span class="d-flex justify-content-space-around align-items-center">
@@ -273,8 +229,12 @@ export default {
         return {
             nome: [],
             email: [],
-            mensagem: []
+            mensagem: [],
+            posts: []
         } 
+    },
+    mounted () {
+        this.getUsersPosts()
     },
     methods: {
         fecharNavBar() {
@@ -315,6 +275,37 @@ export default {
                 this.nome = ''
                 this.email = ''
                 this.mensagem = ''
+                
+            })
+            .catch((error) => {
+                setTimeout(() => {
+                    loader.hide(),
+                    this.$notify({
+                        message: error.response.data.message,
+                        type: 'danger'
+                    })
+                },1000)  
+            })
+
+        },
+        getUsersPosts() {
+        
+            let loader = this.$loading.show({
+                container: this.fullPage ? null : this.$refs.formContainer,
+                canCancel: false,
+                onCancel: this.onCancel,
+            })
+
+            axios.get('/api/user/posts')
+            .then((response) => {
+
+                this.posts = response.data.object.data
+
+                console.log(this.posts)
+
+                setTimeout(() => {
+                    loader.hide()
+                },1000)  
                 
             })
             .catch((error) => {

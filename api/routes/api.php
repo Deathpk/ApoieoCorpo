@@ -18,6 +18,7 @@ Route::post('auth/register', 'Api\Auth\JWTAuthController@register');
 Route::post('auth/login', 'Api\Auth\JWTAuthController@login');
 /* Contadores*/
 Route::get('user/counter','Api\userController@getUsersCounter');
+Route::get('user/posts','Api\userController@getUsersPosts');
 Route::get('business/counter', 'Api\businessController@getBusinessCounter');
 
 Route::post('contact/help', 'Api\contactController@sendContactMessage');
