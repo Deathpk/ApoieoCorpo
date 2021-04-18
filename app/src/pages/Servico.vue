@@ -18,9 +18,31 @@
                 <span>
                   <i :class="statsCards.ativado"></i> <span class="text-dark font-weight-bold">Ramo:</span> {{ servico.Ramo }} <br>
                   <i :class="statsCards.ativado"></i> <span class="text-dark font-weight-bold">E-mail:</span> {{ servico.Contato }} <br>
-                  <span v-if="!(servico.WhatsApp == null)"><i :class="statsCards.ativado"></i> <span class="text-dark font-weight-bold">WhatsApp:</span><a :href="servico.WhatsApp" target="_blank" class="text-green"> WhatsApp</a></span> <br>                  
-                  <span v-if="!(servico.Facebook == null)"><i :class="statsCards.ativado"></i> <span  v-if="!(servico.WhatsApp == null)" class="text-dark font-weight-bold">Facebook:</span><a :href="servico.Facebook" target="_blank" class="text-blue"> Facebook</a></span> <br>                  
-                  <span v-if="!(servico.Instagram == null)"><i :class="statsCards.ativado"></i> <span v-if="!(servico.WhatsApp == null)" class="text-dark font-weight-bold">Instagram:</span><a :href="servico.Instagram" target="_blank" class="text-purple"> Instagram</a></span> <br>  
+                  
+                  <span class="d-flex">
+                    <span v-if="!(servico.WhatsApp == null)">
+                      <a :href="servico.WhatsApp" target="_blank" class="text-green">
+                        <i class="fa fa-whatsapp"></i>
+                      </a>
+                    </span><br>                  
+
+                    <span v-if="!(servico.Facebook == null)">
+                      <span  v-if="!(servico.WhatsApp == null)" class="text-dark font-weight-bold">
+                        <a :href="servico.Facebook" target="_blank" class="text-blue">
+                          <i class="fa fa-facebook"></i>
+                        </a>
+                      </span>  
+                    </span><br>                  
+
+                    <span v-if="!(servico.Instagram == null)">
+                      <span v-if="!(servico.WhatsApp == null)" class="text-dark font-weight-bold">
+                        <a :href="servico.Instagram" target="_blank" class="text-purple">
+                          <i class="fa fa-instagram"></i>
+                        </a>
+                      </span>
+                    </span><br>
+                  </span>
+
                 </span>
               </span>
               <!-- Botões -->

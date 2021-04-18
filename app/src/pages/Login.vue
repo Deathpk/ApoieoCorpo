@@ -1,9 +1,9 @@
 <template>
     <section id="register">
-        <div class="container ass">
+        <div class="container dash">
             <div class="row">
                 <div class="form-group mt-4 ml-4">
-                    <router-link class="btn btn-white text-blue display-4" to="/home">Apoie o Corpo</router-link>
+                    <router-link class="btn btn-white text-blue display-4" to="/home"><i class="fa fa-arrow-left"></i>Voltar</router-link>
                 </div>
                 <div id="middle-screen" class="col-12 col-md-6 col-lg-4 col-xl-2 text-center">
                     <form v-on:submit.prevent="login">
@@ -84,7 +84,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.ass {
+.dash {
     position: absolute;
 }
 

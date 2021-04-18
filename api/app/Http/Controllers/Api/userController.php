@@ -69,11 +69,18 @@ class userController extends Controller
     public function getUsersCounter()
     {
         $usersCounter = userModel::getUsersCounter();
-        if($usersCounter > 0){
+        $usersCounterPosts = postdataModel::getPostsCounter();
+
+        $array = [
+            'Users' => $usersCounter,
+            'Posts' => $usersCounterPosts
+        ];
+
+        if($usersCounter > 0 || $usersCounterPosts > 0){
             return response()->json([
                 'message' => 'Usuários encontrados!',
                 'error' => false,
-                'object' => $usersCounter
+                'object' => $array
             ],200);
         }
         return response()->json([
@@ -81,6 +88,24 @@ class userController extends Controller
             'error' => false,
             'object' => null
         ],404);
+    }
+
+    public function getUsersPosts()
+    {
+        $usersPosts = postdataModel::getUsersPosts();
+        if(count($usersPosts) > 0){
+            return response()->json([
+                'message' => 'Posts encontrados!',
+                'error' => false,
+                'object' => $usersPosts
+            ],200);
+        }
+        return response()->json([
+            'message' => 'Não foram encontrados posts!',
+            'error' => false,
+            'object' => null
+        ],404);
+        
     }
 
 }

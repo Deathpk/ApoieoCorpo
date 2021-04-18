@@ -1,7 +1,7 @@
 <template>
     <div id="home">
         <nav class="navbar navbar-expand-xl fixed-top navbar-transparent">
-            <router-link class="navbar-brand text-white text-uppercase font-weight-bold ml-5" to="/home"></router-link>
+            <img src="../assets/img/ac.png" alt="Apoie o Corpo" class="img-fluid ml-4" width="112" height="112">
             <button v-on:click="abrirNavBar()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
@@ -9,22 +9,22 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav col-md-6 ml-auto d-flex justify-content-space-evenly align-items-center">
-                    <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('home')">Home</a>
-                    <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('sobre')">Sobre</a>
-                    <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('servicos')">Serviços</a>
-                    <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('contato')">Contato</a>
-                    <router-link class="text-white text-uppercase font-weight-bold" to="/login">Login</router-link>
+                    <a class="un nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('home')">Home</a>
+                    <a class="un nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('sobre')">Sobre</a>
+                    <a class="un nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('servicos')">Serviços</a>
+                    <a class="un nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('contato')">Contato</a>
+                    <router-link class="un nav-link text-uppercase text-white font-weight-bold" to="/login">Login</router-link>
                     <router-link class="btn btn-blue text-white" to="/register">Cadastrar-se</router-link>
                 </div>
             </div>
         </nav>
         <div id="mySidenav" class="sidenav">
             <a class="closebtn" v-on:click="fecharNavBar()">&times;</a>
-            <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('home')">Home</a>
-            <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('sobre')">Sobre</a>
-            <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('servicos')">Serviços</a>
-            <a class="nav-item nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('contato')">Contato</a>
-            <router-link class="text-white text-uppercase font-weight-bold" to="/login">Login</router-link>
+            <a class="un nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('home')">Home</a>
+            <a class="un nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('sobre')">Sobre</a>
+            <a class="un nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('servicos')">Serviços</a>
+            <a class="un nav-link text-uppercase text-white font-weight-bold" v-on:click="scrollSmoothTo('contato')">Contato</a>
+            <router-link class="un nav-link text-uppercase text-white font-weight-bold" to="/login">Login</router-link>
             <router-link class="text-white text-uppercase font-weight-bold" to="/register">Cadastrar-se</router-link>
         </div>
         <!-- Home -->
@@ -32,7 +32,7 @@
             <div class="hero-text">
                 <h2 class="text-uppercase text-white font-weight-bold">Seja bem-vindo ao <br><span class="text-blue">apoie o corpo</span></h2>
                 <p class="text-white">Entre em contato com todos os anunciantes cadastrados <br> e ajude a economia local</p>
-                <form @submit.prevent>
+                <!-- <form @submit.prevent>
                   <div class="row">
                       <div class="col-md-12 d-block d-xl-flex justify-content-center align-items-center border-grey">
                         <div class="col-12 col-xl-3 my-2">
@@ -57,7 +57,7 @@
                         </div>
                       </div>
                   </div>
-                </form>
+                </form> -->
             </div>
         </div>
         <!-- Sobre -->
@@ -91,84 +91,42 @@
                         <div class="row h-100">
                             <div class="col-md-12 justify-content-center align-items-center text-center">                    
                                 <carousel :per-page="1" :page-change="1" :scrollPerPage="false" :speed="1000">
-                                    <slide>
+                                    <slide v-for="(post, i) in posts" :key="i">
                                         <div class="card col-md-11 float-right mx-2">
                                             <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="Casa 1">
                                             <div class="card-body">
                                                 <div class="text-left">
-                                                    <p class="text-blue font-weight-bold">Lorem ipsum dolor</p>
+                                                    <p class="text-blue font-weight-bold">Ramo: {{ post.Ramo }}</p>
                                                     <span class="border d-flex"></span>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
+                                                    <p class="text-blue mt-3">Nome: {{ post.Nome }}</p>
+                                                    <p class="text-blue mt-3">Descrição: {{ post.Descricao }}</p>
+                                                    <p class="text-blue mt-3">Contato: {{ post.Contato }}</p>
+                                                    <p class="text-blue mt-3">Estado: {{ post.Estado }}</p>
+                                                    <p class="text-blue mt-3">Cidade: {{ post.Cidade }}</p>
                                                     <span class="d-flex">
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    </span>
-                                                    <span class="border d-flex"></span>
-                                                    <span class="d-flex justify-content-space-around align-items-center">
-                                                        <p class="mt-3 text-blue">R$ 200</p>
-                                                        <button class="btn btn-blue font-weight-bold text-white text-uppercase">Saiba Mais</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </slide>
-                                    <slide>
-                                        <div class="card col-md-11 float-right mx-2">
-                                            <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="Casa 1">
-                                            <div class="card-body">
-                                                <div class="text-left">
-                                                    <p class="text-blue font-weight-bold">Lorem ipsum dolor</p>
-                                                    <span class="border d-flex"></span>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <span class="d-flex">
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    </span>
-                                                    <span class="border d-flex"></span>
-                                                    <span class="d-flex justify-content-space-around align-items-center">
-                                                        <p class="mt-3 text-blue">R$ 200</p>
-                                                        <button class="btn btn-blue font-weight-bold text-white text-uppercase">Saiba Mais</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </slide>
-                                    <slide>
-                                        <div class="card col-md-11 float-right mx-2">
-                                            <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="Casa 1">
-                                            <div class="card-body">
-                                                <div class="text-left">
-                                                    <p class="text-blue font-weight-bold">Lorem ipsum dolor</p>
-                                                    <span class="border d-flex"></span>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <span class="d-flex">
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    </span>
-                                                    <span class="border d-flex"></span>
-                                                    <span class="d-flex justify-content-space-around align-items-center">
-                                                        <p class="mt-3 text-blue">R$ 200</p>
-                                                        <button class="btn btn-blue font-weight-bold text-white text-uppercase">Saiba Mais</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </slide>
-                                    <slide>
-                                        <div class="card col-md-11 float-right mx-2">
-                                            <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="Casa 1">
-                                            <div class="card-body">
-                                                <div class="text-left">
-                                                    <p class="text-blue font-weight-bold">Lorem ipsum dolor</p>
-                                                    <span class="border d-flex"></span>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <span class="d-flex">
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
+                                                        <span class="d-flex">
+                                                            <span v-if="!(post.WhatsApp == null)">
+                                                            <a :href="post.WhatsApp" target="_blank" class="text-green">
+                                                                <i class="fa fa-whatsapp"></i>
+                                                            </a>
+                                                            </span><br>                  
+
+                                                            <span v-if="!(post.Facebook == null)">
+                                                            <span  v-if="!(post.WhatsApp == null)" class="text-dark font-weight-bold">
+                                                                <a :href="post.Facebook" target="_blank" class="text-blue">
+                                                                <i class="fa fa-facebook"></i>
+                                                                </a>
+                                                            </span>  
+                                                            </span><br>                  
+
+                                                            <span v-if="!(post.Instagram == null)">
+                                                            <span v-if="!(post.WhatsApp == null)" class="text-dark font-weight-bold">
+                                                                <a :href="post.Instagram" target="_blank" class="text-purple">
+                                                                <i class="fa fa-instagram"></i>
+                                                                </a>
+                                                            </span>
+                                                            </span><br>
+                                                        </span>
                                                     </span>
                                                     <span class="border d-flex"></span>
                                                     <span class="d-flex justify-content-space-around align-items-center">
@@ -193,131 +151,25 @@
                     <div class="col-md-12 my-5 d-block d-lg-flex justify-content-center align-items-center">
                         <div class="col-lg-3 text-center">
                             <img src="../assets/img/home/icon_1.png" alt="">
-                            <h2 class="text-blue font-weight-bold">1000</h2>
+                            <h2 class="text-blue font-weight-bold">
+                                <ICountUp
+                                    :delay="delay"
+                                    :endVal="contador_posts"
+                                    :options="options"
+                                />
+                            </h2>
                             <h2 class="text-white font-weight-bold">Anúncios</h2>
                         </div>
                         <div class="col-lg-3 text-center">
-                            <img src="../assets/img/home/icon_2.png" alt="">
-                            <h2 class="text-blue font-weight-bold">1000</h2>
-                            <h2 class="text-white font-weight-bold">Localizações</h2>
-                        </div>
-                        <div class="col-lg-3 text-center">
                             <img src="../assets/img/home/icon_3.png" alt="">
-                            <h2 class="text-blue font-weight-bold">1000</h2>
+                            <h2 class="text-blue font-weight-bold">
+                                <ICountUp
+                                    :delay="delay"
+                                    :endVal="contador_users"
+                                    :options="options"
+                                />
+                            </h2>
                             <h2 class="text-white font-weight-bold">Membros</h2>
-                        </div>
-                        <div class="col-lg-3 text-center">
-                            <img src="../assets/img/home/icon_4.png" alt="">
-                            <h2 class="text-blue font-weight-bold">1000</h2>
-                            <h2 class="text-white font-weight-bold">Impulsionados</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Produtos Impulsionados -->
-        <section class="position-relative" id="servicos">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <h2 class="text-blue font-weight-bold">Serviços Impulsionados</h2>
-                        <p>Serviços impulsionados devido a sua causa e razão <br> social por aqueles cadastrados</p>    
-                    </div>  
-
-                    <div id="carousel-right" class="container">
-                        <div class="row h-100">
-                            <div class="col-md-12 justify-content-center align-items-center text-center">                    
-                                <carousel :per-page="1" :page-change="1" :scrollPerPage="false" :speed="1000">
-                                    <slide>
-                                        <div class="card col-md-11 float-right mx-2">
-                                            <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="Casa 1">
-                                            <div class="card-body">
-                                                <div class="text-left">
-                                                    <p class="text-blue font-weight-bold">Lorem ipsum dolor</p>
-                                                    <span class="border d-flex"></span>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <span class="d-flex">
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    </span>
-                                                    <span class="border d-flex"></span>
-                                                    <span class="d-flex justify-content-space-around align-items-center">
-                                                        <p class="mt-3 text-blue">R$ 200</p>
-                                                        <button class="btn btn-blue font-weight-bold text-white text-uppercase">Saiba Mais</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </slide>
-                                    <slide>
-                                        <div class="card col-md-11 float-right mx-2">
-                                            <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="Casa 1">
-                                            <div class="card-body">
-                                                <div class="text-left">
-                                                    <p class="text-blue font-weight-bold">Lorem ipsum dolor</p>
-                                                    <span class="border d-flex"></span>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <span class="d-flex">
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    </span>
-                                                    <span class="border d-flex"></span>
-                                                    <span class="d-flex justify-content-space-around align-items-center">
-                                                        <p class="mt-3 text-blue">R$ 200</p>
-                                                        <button class="btn btn-blue font-weight-bold text-white text-uppercase">Saiba Mais</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </slide>
-                                    <slide>
-                                        <div class="card col-md-11 float-right mx-2">
-                                            <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="Casa 1">
-                                            <div class="card-body">
-                                                <div class="text-left">
-                                                    <p class="text-blue font-weight-bold">Lorem ipsum dolor</p>
-                                                    <span class="border d-flex"></span>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <span class="d-flex">
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    </span>
-                                                    <span class="border d-flex"></span>
-                                                    <span class="d-flex justify-content-space-around align-items-center">
-                                                        <p class="mt-3 text-blue">R$ 200</p>
-                                                        <button class="btn btn-blue font-weight-bold text-white text-uppercase">Saiba Mais</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </slide>
-                                    <slide>
-                                        <div class="card col-md-11 float-right mx-2">
-                                            <img class="img-fluid" src="../assets/img/home/undraw_Freelancer_re_irh4.png" alt="Casa 1">
-                                            <div class="card-body">
-                                                <div class="text-left">
-                                                    <p class="text-blue font-weight-bold">Lorem ipsum dolor</p>
-                                                    <span class="border d-flex"></span>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    <span class="d-flex">
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                        <p class="text-blue mt-3">Lorem ipsum dolor</p>
-                                                    </span>
-                                                    <span class="border d-flex"></span>
-                                                    <span class="d-flex justify-content-space-around align-items-center">
-                                                        <p class="mt-3 text-blue">R$ 200</p>
-                                                        <button class="btn btn-blue font-weight-bold text-white text-uppercase">Saiba Mais</button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </slide>
-                                </carousel>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -373,16 +225,40 @@
 </template>
 <script>
 import axios from 'axios'
+import ICountUp from 'vue-countup-v2';
 
 export default {
     data() {
         return {
             nome: [],
             email: [],
-            mensagem: []
+            mensagem: [],
+            posts: [],
+            info: [],
+            contador_users: 0,
+            contador_posts: 0,
+            delay: 1000,
+            options: {
+                useEasing: true,
+                useGrouping: true,
+                separator: ',',
+                decimal: '.',
+                prefix: '',
+                suffix: ''
+            }
         } 
     },
+    components: {
+      ICountUp
+    },
+    mounted () {
+        this.getUsersPosts()
+        this.getUsersCounter()
+    },
     methods: {
+        theFormat(number) {
+            return number.toFixed(2);
+        },
         fecharNavBar() {
             document.getElementById("mySidenav").style.width = "0";
         },
@@ -402,7 +278,7 @@ export default {
                 onCancel: this.onCancel,
             })
 
-            axios.post('/api/sendFormulario', 
+            axios.post('/api/contact/help', 
             {
                 nome: this.nome,
                 email: this.email,
@@ -421,6 +297,70 @@ export default {
                 this.nome = ''
                 this.email = ''
                 this.mensagem = ''
+                
+            })
+            .catch((error) => {
+                setTimeout(() => {
+                    loader.hide(),
+                    this.$notify({
+                        message: error.response.data.message,
+                        type: 'danger'
+                    })
+                },1000)  
+            })
+
+        },
+        getUsersPosts() {
+        
+            let loader = this.$loading.show({
+                container: this.fullPage ? null : this.$refs.formContainer,
+                canCancel: false,
+                onCancel: this.onCancel,
+            })
+
+            axios.get('/api/user/posts')
+            .then((response) => {
+
+                this.posts = response.data.object.data
+
+                setTimeout(() => {
+                    loader.hide()
+                },1000)  
+                
+            })
+            .catch((error) => {
+                setTimeout(() => {
+                    loader.hide(),
+                    this.$notify({
+                        message: error.response.data.message,
+                        type: 'danger'
+                    })
+                },1000)  
+            })
+
+        },
+        getUsersCounter() {
+        
+            let loader = this.$loading.show({
+                container: this.fullPage ? null : this.$refs.formContainer,
+                canCancel: false,
+                onCancel: this.onCancel,
+            })
+
+            axios.get('/api/user/counter')
+            .then((response) => {
+
+                this.info = response.data.object
+
+                this.contador_posts = this.info.Posts
+                this.contador_posts = parseInt(this.contador_posts.toString())
+                
+                this.contador_users = this.info.Users
+                this.contador_users = parseInt(this.contador_users.toString())
+
+                setTimeout(() => {
+                    loader.hide()
+                },1000)  
                 
             })
             .catch((error) => {
@@ -484,5 +424,30 @@ nav {
 @media (max-height: 1024px) {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
+}
+
+/* Aqui vai a transição dos links do navbar */
+.un {
+	display: inline-block;
+	position: relative;
+	padding-bottom: 3px;
+  margin-right: 10px;
+}
+.un:last-child {
+  margin-right: 0;
+}
+
+.un:after {
+	content: '';
+	display: block;
+	margin: auto;
+	height: 3px;
+	width: 0px;
+	background: transparent;
+	transition: width .5s ease, background-color .5s ease;
+}
+.un:hover:after {
+	width: 100%;
+	background: #FFFFFF;
 }
 </style>
