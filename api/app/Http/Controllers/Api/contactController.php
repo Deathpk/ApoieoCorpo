@@ -18,7 +18,7 @@ class contactController extends Controller
             'email' => strtolower($request->email),
             'mensagem' => $request->mensagem
         ];
-        //   return new \App\Mail\contactMessage($dadosRemetente);// Somente para debugar na view...
+          return new \App\Mail\contactMessage($dadosRemetente);// Somente para debugar na view...
         Mail::send(new contactMessage($dadosRemetente));
 
         if(Mail::failures()){

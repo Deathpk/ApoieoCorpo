@@ -108,13 +108,20 @@ class JWTAuthController extends Controller
         return response()->json(['message' => 'Deslogado com sucesso!']);
     }
 
-
+    /**
+     * TODO: 
+     * Adicionar validação dos campos
+     * Enviar no botão do e-mail a url do formulário de reset + o hash da senha antiga como param.
+     */
     public function sendPasswordReset(Request $request)
-    {
+    {   
         if( $this->isEmailRegistered($request->email) ){
-            // Criar o token para utilizar uma vez.
-
+            // Envia o hash da antiga senha para comparação.
+          $oldPassword = User::where('email',$request->email)->first('password');
+          return new resetPassword($oldPassword->password);// Somente para debugar na view...
+            // Mail::send(new resetPassword($oldPassword->password));    
         }
+        
     }
 
 

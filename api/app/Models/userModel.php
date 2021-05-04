@@ -16,6 +16,8 @@ class userModel extends Model
        return userModel::where('email','=', Auth::user()->email)->first('id');
     }
 
+    
+
     public static function getUserName()
     {
        return userModel::where('email','=', Auth::user()->email)->first('name');

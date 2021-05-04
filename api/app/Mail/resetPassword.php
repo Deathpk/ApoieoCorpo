@@ -7,19 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class contactMessage extends Mailable
+class resetPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private $user;
+    private $oldPassword;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($dadosRemetente)
+    public function __construct($oldPassword)
     {
-        $this->user = $dadosRemetente;
+        $this->oldPassword = $oldPassword;
     }
 
     /**
@@ -33,10 +33,8 @@ class contactMessage extends Mailable
         $this->to('bettercallmiguel@gmail.com');
         $this->from('bettercallmiguel@gmail.com', 'Apoie o Corpo');
 
-        return $this->markdown('mail.contactMessage',[
-            'email'=>$this->user['email'],
-            'name'=>$this->user['nome'],
-            'mensagem'=>$this->user['mensagem']
+        return $this->markdown('mail.sendPasswordResetLink',[
+            'oldPassword'=> $this->oldPassword
         ]);
     }
 }
