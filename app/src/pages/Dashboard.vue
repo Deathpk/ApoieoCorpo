@@ -45,28 +45,10 @@
 
                 </span>
               </span>
-              <!-- Botões -->
-              <button class="btn mr-1 mt-1" v-on:click="editar(servico.ID)">Editar <i class="fa fa-edit"></i></button>
-              <!-- <button class="btn mr-1 mt-1" :to="{ path:'/editar', params: { id: servico.ID } }" title="Editar serviço"><i class="fa fa-edit"></i></button> -->
-              <!-- <button class="btn mx-1" @click="desativar(servico.id)" title="Desativar serviço"><i class="fa fa-times-circle"></i></button>
-              <button class="btn mx-1" disabled @click="ativar(servico.id)" title="Ativar serviço"><i class="fa fa-check-circle"></i></button>
-              <button class="btn mx-1" @click="excluir(servico.id)" title="Excluir serviço"><i class="fa fa-trash-alt"></i></button> -->
-            <!-- </span> -->
-            
-            <!-- <span v-if="servico.sin_ativo == 'N'"><i :class="statsCards.inativado"></i> <span class="text-dark font-weight-bold">Status:</span> Inativado <br> -->
-              <!-- Atualização -->
-              <!-- <i class="ti-timer mb-2"></i> <span class="text-dark font-weight-bold">Última atualização em:</span> {{servico.updated_at}} <br> -->
-              <!-- Botões -->
-              <!-- <button class="btn mr-1 mt-1" disabled :to="{ name:'serviço/alterar', params: { id: servico.id } }" title="Alterar serviço"><i class="far fa-edit"></i></button>
-              <button class="btn mx-1" disabled @click="desativar(servico.id)" title="Desativar serviço"><i class="far fa-times-circle"></i></button>
-              <button class="btn mx-1" @click="ativar(servico.id)" title="Ativar serviço"><i class="far fa-check-circle"></i></button>
-              <button class="btn mx-1" @click="excluir(servico.id)" title="Excluir serviço"><i class="far fa-trash-alt"></i></button>            
-            </span>  -->
           </div>
         </stats-card>
       </div>
     </div>
-    <router-link class="btn btn-blue" to="/servico/cadastro">Adicionar novo</router-link>
   </div>
 </template>
 <script>
