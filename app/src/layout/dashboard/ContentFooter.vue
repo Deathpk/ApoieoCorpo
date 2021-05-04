@@ -11,8 +11,7 @@
       <div class="copyright d-flex flex-wrap">
         &copy; Coded with
         <i class="fa fa-heart heart"></i> by
-        <a href="https://github.com/cristijora" target="_blank"> &nbsp; Cristi Jora.</a>&nbsp;
-        Designed by <a href="https://www.creative-tim.com/?ref=pdf-vuejs" target="_blank">&nbsp; Creative Tim.</a>
+        <a href="https://github.com/anvictorsantos" target="_blank">&nbsp; Antonio Pontes</a>&nbsp; & &nbsp;<a href="https://github.com/Deathpk" target="_blank">Michel Henrique</a>&nbsp;
       </div>
     </div>
   </footer>
