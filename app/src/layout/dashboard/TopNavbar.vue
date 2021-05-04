@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">{{routeName}}</a>
+      <a class="navbar-brand" href="#"><img src="@/assets/img/ac.png" class="img-fluid" width="64" alt=""></a>
       <button class="navbar-toggler navbar-burger mr-2"
               type="button"
               @click="toggleSidebar"
