@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img src="@/assets/img/ac.png" class="img-fluid" width="64" alt=""></a>
+      <img src="@/assets/img/ac.png" class="img-fluid ml-3" width="64" alt="">
       <button class="navbar-toggler navbar-burger mr-2"
               type="button"
               @click="toggleSidebar"
