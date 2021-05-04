@@ -54,9 +54,9 @@ export default {
             email: this.email,
             password: this.password
         })
-        .then((response) => {
-            
+        .then((response) => {            
             localStorage.setItem('access_token', response.data.access_token)
+            localStorage.setItem('user_name', response.data.user)
             setTimeout(() => {
                 loader.hide(),
                 this.$notify({
