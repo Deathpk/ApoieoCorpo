@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">{{routeName}}</a>
+      <img src="@/assets/img/ac.png" class="img-fluid ml-3" width="64" alt="">
       <button class="navbar-toggler navbar-burger mr-2"
               type="button"
               @click="toggleSidebar"
@@ -14,9 +14,9 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <drop-down class="nav-item"
-                     title=""
+                     title="Configurações"
                      title-classes="nav-link"
-                     icon="fa fa-ellipsis-v">
+                     icon="ti-settings">
             <!-- <router-link :to="{ path: '/profile' }" class="dropdown-item">Perfil</router-link> -->
             <a class="dropdown-item" v-on:click="logout()">Sair</a>
           </drop-down>

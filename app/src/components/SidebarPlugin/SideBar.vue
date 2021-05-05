@@ -13,7 +13,7 @@
             <div class="logo-img">
                 <img src="@/assets/img/ac.png" alt="">
             </div>
-          {{title}}
+          {{ user_name }}
         </a>
       </div>
       <slot>
@@ -105,7 +105,8 @@ export default {
       isWindows: false,
       hasAutoHeight: false,
       links: [],
-      access_token: []
+      access_token: [],
+      user_name: ''
     };
   },
   methods: {
@@ -135,6 +136,7 @@ export default {
     if (localStorage.getItem('access_token')) {
       try {
         this.bearer = localStorage.getItem('access_token')
+        this.user_name = localStorage.getItem('user_name')
       } catch (error) {
         console.log(error)
       }

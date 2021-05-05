@@ -38,6 +38,7 @@ export default {
     return {
         email: [],
         password: [],
+        isRegister: ''
     }
   },
   methods: {
@@ -54,9 +55,10 @@ export default {
             email: this.email,
             password: this.password
         })
-        .then((response) => {
-            
+        .then((response) => {            
             localStorage.setItem('access_token', response.data.access_token)
+            localStorage.setItem('user_name', response.data.user)
+            localStorage.setItem('isRegister', true)
             setTimeout(() => {
                 loader.hide(),
                 this.$notify({

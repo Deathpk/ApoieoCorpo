@@ -68,7 +68,10 @@ const routes = [
         name: "editar",
         component: ServicoEditar
       },
-    ]
+    ],
+    meta: {
+      requiresAuth: true
+    }
   },
   { path: "*", component: NotFound }
 ];
