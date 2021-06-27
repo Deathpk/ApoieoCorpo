@@ -28,19 +28,18 @@ Route::group(['middleware'=>['apiJwt']],function(){
     Route::post('auth/logout', 'Api\Auth\JWTAuthController@logout');
 
     Route::prefix('business')->group(function (){
-        Route::post('/register', 'Api\businessController@register');
+        Route::post('/doRegister', 'Api\businessController@register');
         Route::put('/update', 'Api\businessController@updateBusiness');
         Route::get('/get/all','Api\businessController@getAllUserPosts');
         Route::post('/search','Api\businessController@searchForBusiness');
         Route::delete('/delete', 'Api\businessController@deleteBusiness');
         Route::get('/get/ufList', 'Api\businessController@getListOfUfs');
-        Route::post('/get/municipios/{id}', 'Api\businessController@getMunicipiosByUf');
+        Route::get('/get/municipios/{id}', 'Api\businessController@getMunicipiosByUf');
     });
 
     Route::prefix('user')->group( function (){
         Route::put('/update', 'Api\userController@updateUserInformation');
         Route::delete('/delete', 'Api\userController@deleteUser');
     });
-
 });
 

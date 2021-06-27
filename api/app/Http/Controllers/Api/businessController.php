@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\postdataModel;
@@ -10,10 +11,17 @@ use App\Helpers\Hutils;
 use App\Http\Requests\deleteBusinessRequest;
 use App\Http\Requests\registerBusinessRequest;
 use Exception;
-use GuzzleHttp\Client;
+use App\Services\Ibge;
 
 class businessController extends Controller
 {
+
+    private $ibgeService;
+
+    public function __construct()
+    {
+        $this->ibgeService = New Ibge();
+    }
 
     /**
     *REGISTRA UM NOVO ESTABELECIOMENTO
@@ -22,11 +30,11 @@ class businessController extends Controller
     */
     public function register(registerBusinessRequest $request)
     {
-       
+
         try{
             $request->merge(['email'=>Auth::user()->email]);
             postdataModel::insertData($request);
-        
+
         }catch (Exception $e){
             return response()->json([
                 'message'=> 'Erro ao cadastrar estabelecimento , tente novamente!',
@@ -69,7 +77,7 @@ class businessController extends Controller
 
     public function updateBusiness(Request $request)
     {
-       
+
         try{
             $isBusinessFromUser = $this->validateBusinessId($request->business);
 
@@ -88,7 +96,7 @@ class businessController extends Controller
                 return response()->json([
                     'message'=>'Este estabelecimento não pertence ao usuário atualmente logado.',
                     'error'=>true
-                ],403);    
+                ],403);
             }
             else if (!$request->has('business') || $request->business == null){
                 return response()->json([
@@ -96,7 +104,7 @@ class businessController extends Controller
                     'error'=>true
                 ],412);
             }
-            
+
 
         } catch(Exception $e){
             return response()->json([
@@ -104,7 +112,7 @@ class businessController extends Controller
                 'object'=>$e->getMessage(),
                 'error'=>true
             ],404);
-        }    
+        }
     }
 
     public function deleteBusiness(deleteBusinessRequest $request)
@@ -121,7 +129,7 @@ class businessController extends Controller
                 'message'=> 'Anuncio não pertence ao usuário logado!.',
                 'error' => true
             ]);
-            
+
         }catch (Exception $e){
             return response()->json([
                 'message'=>'Erro ao deletar anuncio do usuário , tente novamente!.',
@@ -142,7 +150,7 @@ class businessController extends Controller
             $business = postdataModel::where('ID' , '=' , $businessId)
             ->where('UserID','=',Auth::user()->email)
             ->get();
-            
+
             if(empty($business[0])){
                 return false;
             }
@@ -173,7 +181,7 @@ class businessController extends Controller
                     'error'=>true
                 ],404);
             }
-            
+
             return response()->json([
                 'message' => 'Resultados encontrados',
                 'object' => $searchResult,
@@ -186,53 +194,39 @@ class businessController extends Controller
         ],412);
     }
 
-    /**
-     * Consome a API do IBGE com Guzzle Http , trazendo todas as UFS do País.
-     * @return JsonResponse
-     */
-    public function getListOfUfs()
+
+    public function getListOfUfs(): JsonResponse
     {
-        $client = new Client();
-        $url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome";
-        try{
-            $response = $client->request('GET', $url);
-        } catch(Exception $e){
+        $ufs = $this->ibgeService->getListOfUfs();
+        if($ufs){
             return response()->json([
-                'message'=> 'Oops... Houve um erro ao buscar dados nessa api.',
-                'object'=>$e->getMessage(),
-                'error'=>true
-            ],404);
+                'message' => 'Resultados Encontrados.',
+                'object' => $ufs,
+                'error' => false
+            ]);
         }
-        
-        $responseBody = json_decode($response->getBody());
         return response()->json([
-            'message' => 'Resultados Encontrados.',
-            'object' => $responseBody,
-            'error' => false
+           'message' => 'Oops... Houve um erro ao buscar dados nessa api.',
+           'error' => true
         ]);
     }
 
-    public function getMunicipiosByUf($ufCode)
+    public function getMunicipiosByUf($ufCode): JsonResponse
     {
-        $client = new Client();
-        $url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados/".$ufCode."/municipios?orderBy=nome";
 
-        try{
-            $response = $client->request('GET', $url);
-        } catch(Exception $e){
+        $municipios = $this->ibgeService->getMunicipiosByUf($ufCode);
+        if($municipios){
             return response()->json([
-                'message'=> 'Oops... Houve um erro ao buscar dados nessa api.',
-                'object'=>$e->getMessage(),
-                'error'=>true
-            ],404);
+                'message' => 'Resultados Encontrados.',
+                'object' => $municipios,
+                'error' => false
+            ]);
         }
 
-        $responseBody = json_decode($response->getBody());
         return response()->json([
-            'message' => 'Resultados Encontrados.',
-            'object' => $responseBody,
-            'error' => false
-        ]);
+            'message'=> 'Oops... Houve um erro ao buscar dados nessa api.',
+            'error'=>true
+        ],404);
     }
 
     public function getBusinessCounter()
@@ -251,5 +245,5 @@ class businessController extends Controller
             'object' => null
         ],404);
     }
-    
+
 }

@@ -31,7 +31,7 @@ class JWTAuthController extends Controller
     * @return \Illuminate\Http\JsonResponse
     */
     public function register(Request $request)
-    {   
+    {
         $validator = Validator::make($request->all(), [
             'name' => 'required|between:2,100',
             'email' => 'required|email|unique:users|max:50',
@@ -44,9 +44,9 @@ class JWTAuthController extends Controller
                 'error'=> true
             ],401);
         }
-        
+
      try{
-        
+
             $user = User::create([
                 'name'=>$request->name,
                 'email'=>strtolower($request->email),
@@ -109,19 +109,18 @@ class JWTAuthController extends Controller
     }
 
     /**
-     * TODO: 
+     * TODO:
      * Adicionar validação dos campos
      * Enviar no botão do e-mail a url do formulário de reset + o hash da senha antiga como param.
      */
     public function sendPasswordReset(Request $request)
-    {   
+    {
         if( $this->isEmailRegistered($request->email) ){
             // Envia o hash da antiga senha para comparação.
           $oldPassword = User::where('email',$request->email)->first('password');
-          return new resetPassword($oldPassword->password);// Somente para debugar na view...
-            // Mail::send(new resetPassword($oldPassword->password));    
-        }
-        
+          return new resetPassword($oldPassword->password,$request->email);// Somente para debugar na view...
+            // Mail::send(new resetPassword($oldPassword->password, $request->email));
+        } // tratar exeção se não houver o e-mail cadastrado.
     }
 
 
@@ -169,5 +168,5 @@ class JWTAuthController extends Controller
         return $this->createNewToken(auth()->refresh());
     }
 
-   
+
 }
