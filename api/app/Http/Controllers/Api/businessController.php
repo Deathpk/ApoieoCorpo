@@ -163,7 +163,7 @@ class businessController extends Controller
             ],404);
         }
     }
-
+    // Checar se está pesquisando por cidade
     public function searchForBusiness(Request $request)
     {
         // dd($request->all());

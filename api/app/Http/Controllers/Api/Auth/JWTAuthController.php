@@ -123,6 +123,16 @@ class JWTAuthController extends Controller
         } // tratar exeção se não houver o e-mail cadastrado.
     }
 
+    /**
+     * TODO:
+     * Adicionar validação
+     * @param Request $request
+     */
+    public function resetPassword(Request $request)
+    {
+
+    }
+
 
     /**
      * Se o e-mail existir no banco retorna true.
