@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ResetPasswordRequest;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Validator;
 use App\User;
 use App\Models\userModel;
@@ -22,7 +25,7 @@ class JWTAuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register','sendPasswordReset']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register','sendPasswordReset','resetPassword']]);
     }
 
     /**
@@ -119,18 +122,41 @@ class JWTAuthController extends Controller
             // Envia o hash da antiga senha para comparação.
           $oldPassword = User::where('email',$request->email)->first('password');
           return new resetPassword($oldPassword->password,$request->email);// Somente para debugar na view...
-            // Mail::send(new resetPassword($oldPassword->password, $request->email));
+//             Mail::send(new resetPassword($oldPassword->password, $request->email));
         } // tratar exeção se não houver o e-mail cadastrado.
     }
 
     /**
      * TODO:
-     * Adicionar validação
-     * @param Request $request
+     * Refatorar?
+     * @param ResetPasswordRequest $request
      */
-    public function resetPassword(Request $request)
+    public function resetPassword(ResetPasswordRequest $request): JsonResponse
     {
+        $user = User::where('email',$request->email)->first();
+        $isOldPasswordValid = self::validateOldPassword($user, $request->oldPassword);
+        if($isOldPasswordValid){
+            try{
+                userModel::updatePassword($user, $request->password);
+            } catch(Exception $e){
+                throw new Exception(
+                    'Oops! , falha ao atualizar senha de usuário. Mensagem: '
+                    .$e->getMessage()
+                );
+            }
+            return response()->json([
+                'message' => 'Senha alterada com sucesso!',
+                'error' => false
+            ]);
+        }
+    }
 
+    public function validateOldPassword(object $user, string $oldPassword)
+    {
+        if($user->password === $oldPassword){
+            return true;
+        }
+        return false;
     }
 
 

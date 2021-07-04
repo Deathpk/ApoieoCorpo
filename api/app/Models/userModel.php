@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +17,7 @@ class userModel extends Model
        return userModel::where('email','=', Auth::user()->email)->first('id');
     }
 
-    
+
 
     public static function getUserName()
     {
@@ -28,7 +29,7 @@ class userModel extends Model
         return userModel::all()->count();
     }
 
-    public static function updateUserInformation($userInformation)
+    public static function updateUserInformation($userInformation): void
     {
         foreach ($userInformation->except('id') as $key => $value){
             userModel::where('id','=',$userInformation['id']->id)->update([
@@ -37,7 +38,14 @@ class userModel extends Model
         }
     }
 
-    public static function deleteUserAccount($accountId)
+    public static function updatePassword(User $user, string $newPassword): void
+    {
+        userModel::where('email',$user->email)->update([
+            'password' => bcrypt($newPassword)
+        ]);
+    }
+
+    public static function deleteUserAccount($accountId): void
     {
         userModel::where('id','=',$accountId)->delete();
     }

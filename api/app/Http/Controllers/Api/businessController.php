@@ -53,7 +53,7 @@ class businessController extends Controller
     {
         try{
             $userPosts = postdataModel::where('UserID','=', Auth::user()->email)->get();
-            // pesquisar uma forma de não utilizar o indice de array
+
             if(empty($userPosts[0])){
                 return response()->json([
                     'message'=>'Usuário não possui estabelecimentos cadastrados.',
