@@ -11,17 +11,15 @@ class resetPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private $oldPassword;
-    private $recipientMail;
+    private $recipientData;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($oldPassword,$recipientMail)
+    public function __construct($recipientData)
     {
-        $this->oldPassword = $oldPassword;
-        $this->recipientMail = $recipientMail;
+        $this->recipientData = $recipientData;
     }
 
     /**
@@ -32,12 +30,12 @@ class resetPassword extends Mailable
     public function build()
     {
         $this->subject('Resetar senha Apoie o Corpo');
-        $this->to($this->recipientMail);
+        $this->to($this->recipientData->email);
         $this->from('bettercallmiguel@gmail.com', 'Apoie o Corpo');
 
         return $this->markdown('mail.sendPasswordResetLink',[
-            'oldPassword'=> $this->oldPassword,
-            'recipientMail' => $this->recipientMail
+            'oldPassword'=> $this->recipientData,
+            'recipientMail' => $this->recipientData->email
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
+use App\Events\PasswordChangeRequested;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResetPasswordRequest;
 use Illuminate\Http\JsonResponse;
@@ -118,12 +119,20 @@ class JWTAuthController extends Controller
      */
     public function sendPasswordReset(Request $request)
     {
+        dd(env('VUE_APP_URL'));
         if( $this->isEmailRegistered($request->email) ){
-            // Envia o hash da antiga senha para comparação.
           $oldPassword = User::where('email',$request->email)->first('password');
-          return new resetPassword($oldPassword->password,$request->email);// Somente para debugar na view...
-//             Mail::send(new resetPassword($oldPassword->password, $request->email));
-        } // tratar exeção se não houver o e-mail cadastrado.
+          event(new PasswordChangeRequested($oldPassword->password, $request->email));
+          return response()->json([
+             'message'=> 'E-mail para resetar senha enviado.',
+             'error' => false
+          ],200);
+        }
+
+        return response()->json([
+            'message' => 'O e-mail inserido não foi encontrado em nossa base de dados.',
+            'error' => true
+        ]);
     }
 
     /**
