@@ -16,6 +16,7 @@ use Exception;
 use App\Helpers\Hutils;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Mail\resetPassword;
+use Illuminate\Support\Facades\Log;
 
 class JWTAuthController extends Controller
 {
@@ -119,7 +120,6 @@ class JWTAuthController extends Controller
      */
     public function sendPasswordReset(Request $request)
     {
-        dd(env('VUE_APP_URL'));
         if( $this->isEmailRegistered($request->email) ){
           $oldPassword = User::where('email',$request->email)->first('password');
           event(new PasswordChangeRequested($oldPassword->password, $request->email));
@@ -148,6 +148,7 @@ class JWTAuthController extends Controller
             try{
                 userModel::updatePassword($user, $request->password);
             } catch(Exception $e){
+                Log::error('Oops! , falha ao atualizar senha de usuário. Mensagem: '.$e->getMessage());
                 throw new Exception(
                     'Oops! , falha ao atualizar senha de usuário. Mensagem: '
                     .$e->getMessage()
@@ -160,12 +161,9 @@ class JWTAuthController extends Controller
         }
     }
 
-    public function validateOldPassword(object $user, string $oldPassword)
+    public function validateOldPassword(object $user, string $oldPassword): bool
     {
-        if($user->password === $oldPassword){
-            return true;
-        }
-        return false;
+        return $user->password === $oldPassword;
     }
 
 
