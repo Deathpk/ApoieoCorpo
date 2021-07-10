@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ResetPasswordRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
+use App\Models\PasswordResetModel;
 use Validator;
 use App\User;
 use App\Models\userModel;
@@ -17,7 +17,6 @@ use App\Helpers\Hutils;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Mail\resetPassword;
 use Illuminate\Support\Facades\Log;
-
 class JWTAuthController extends Controller
 {
     /**
@@ -116,13 +115,15 @@ class JWTAuthController extends Controller
     /**
      * TODO:
      * Adicionar validação dos campos
-     * Enviar no botão do e-mail a url do formulário de reset + o hash da senha antiga como param.
+     * Enviar no botão do e-mail a url do formulário de reset + o token como param.
      */
     public function sendPasswordReset(Request $request)
     {
         if( $this->isEmailRegistered($request->email) ){
-          $oldPassword = User::where('email',$request->email)->first('password');
-          event(new PasswordChangeRequested($oldPassword->password, $request->email));
+
+          PasswordResetModel::storePasswordResetInfo($request->email);
+          $resetInfo = PasswordResetModel::getResetInfo($request->email);
+          event(new PasswordChangeRequested($resetInfo));
           return response()->json([
              'message'=> 'E-mail para resetar senha enviado.',
              'error' => false
@@ -137,16 +138,17 @@ class JWTAuthController extends Controller
 
     /**
      * TODO:
-     * Refatorar?
+     * Refatorar dps...
      * @param ResetPasswordRequest $request
      */
     public function resetPassword(ResetPasswordRequest $request): JsonResponse
     {
         $user = User::where('email',$request->email)->first();
-        $isOldPasswordValid = self::validateOldPassword($user, $request->oldPassword);
-        if($isOldPasswordValid){
+        $isTokenValid = self::validateToken($request->email, $request->token);
+        if($isTokenValid){
             try{
                 userModel::updatePassword($user, $request->password);
+                self::deletePasswordResetToken($request->email);
             } catch(Exception $e){
                 Log::error('Oops! , falha ao atualizar senha de usuário. Mensagem: '.$e->getMessage());
                 throw new Exception(
@@ -161,9 +163,18 @@ class JWTAuthController extends Controller
         }
     }
 
-    public function validateOldPassword(object $user, string $oldPassword): bool
+    public function validateToken(string $email, string $token): bool
     {
-        return $user->password === $oldPassword;
+        $storedToken = PasswordResetModel::where('email',$email)->first();
+        if($storedToken){
+            return $storedToken->token === $token;
+        }
+        throw new Exception('Token para resetar senha não encontrado.');
+    }
+
+    public function deletePasswordResetToken(string $email): void
+    {
+        PasswordResetModel::where('email',$email)->delete();
     }
 
 

@@ -34,7 +34,7 @@ class resetPassword extends Mailable
         $this->from('bettercallmiguel@gmail.com', 'Apoie o Corpo');
 
         return $this->markdown('mail.sendPasswordResetLink',[
-            'oldPassword'=> $this->recipientData,
+            'token'=> $this->recipientData->token,
             'recipientMail' => $this->recipientData->email
         ]);
     }

@@ -38,6 +38,7 @@ class userModel extends Model
         }
     }
 
+
     public static function updatePassword(User $user, string $newPassword): void
     {
         userModel::where('email',$user->email)->update([

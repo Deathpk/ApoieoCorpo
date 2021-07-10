@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\PasswordResetModel;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -15,24 +16,24 @@ class PasswordChangeRequested
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    private $oldPassword;
+    private $token;
     private $userEmail;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(string $oldPassword, string $userEmail)
+    public function __construct(PasswordResetModel $resetInfo)
     {
-        $this->oldPassword = $oldPassword;
-        $this->userEmail = $userEmail;
+        $this->userEmail = $resetInfo->email;
+        $this->token = $resetInfo->token;
     }
 
     public function getData(): Collection
     {
         $resetInfo = collect();
         $resetInfo->email = $this->userEmail;
-        $resetInfo->oldPassword = $this->oldPassword;
+        $resetInfo->token = $this->token;
 
         return $resetInfo;
     }
